@@ -34,8 +34,9 @@ main {
 
 .list-container {
   position: absolute;
+  padding-left: 15px;
+}
 
-  /* Need to figure out how to size container without exact measurements */
-  width: 323px;
-  height: 515px;
+ol {
+  padding: 0;
 }

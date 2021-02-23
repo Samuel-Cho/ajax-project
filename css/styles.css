@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .modal-background {
   height: 100vh;
   width: 100%;
@@ -12,7 +16,6 @@
 
 .app-title {
   height: 100%;
-  font-family: 'Roboto', sans-serif;
   font-size: 30px;
 }
 
@@ -61,6 +64,23 @@
   background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
 }
 
+.select {
+  text-decoration: underline;
+}
+
 .list-container {
   background: rgba(255, 255, 255, 0.75);
+
+  /* Need to figure out how to size container without exact measurements */
+  width: 323px;
+  height: 515px;
+  overflow-y: auto;
+}
+
+ol {
+  list-style-position: inside;
+}
+
+li {
+  font-size: 25px;
 }
