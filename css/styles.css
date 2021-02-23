@@ -24,3 +24,7 @@
   border: 20px solid black;
   background-color: white;
 }
+
+.press-here:focus {
+  outline: none;
+}
