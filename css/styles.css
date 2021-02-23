@@ -70,10 +70,11 @@ body {
 
 .list-container {
   background: rgba(255, 255, 255, 0.75);
+  height: 77%;
+  width: 86%;
 
-  /* Need to figure out how to size container without exact measurements */
-  width: 323px;
-  height: 515px;
+  /* width: 323px;
+  height: 515px; */
   overflow-y: auto;
 }
 
