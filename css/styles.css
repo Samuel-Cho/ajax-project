@@ -28,3 +28,31 @@
 .press-here:focus {
   outline: none;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.region {
+  text-align: center;
+}
+
+.region-button {
+  height: 47px;
+  width: 47px;
+  border-radius: 50%;
+  border: none;
+}
+
+.kanto {
+  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
+}
+
+.johto {
+  background: linear-gradient(180deg, #ffd700 40.63%, rgba(255, 255, 255, 0) 60%), #c0c0c0;
+}
+
+.caught {
+  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
+}
