@@ -31,3 +31,11 @@ main {
   left: 0;
   padding: 26px;
 }
+
+.list-container {
+  position: absolute;
+
+  /* Need to figure out how to size container without exact measurements */
+  width: 323px;
+  height: 515px;
+}
