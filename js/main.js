@@ -9,6 +9,7 @@ var johtoList = [];
 // var caughtList = [];
 var kantoOl = null;
 var johtoOl = null;
+// var pokemonInfo = [];
 
 $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
@@ -99,12 +100,32 @@ function johtoDex() {
 
 johtoDex();
 
-$listContainer.addEventListener('click', function (target) {
+$listContainer.addEventListener('click', function pokemonPage(target) {
   if (event.target.matches('li')) {
-    pokemonPage();
+    var pokemonInfo = pokemonDetails(event.target.id);
+    // console.log(pokemonInfo);
+    return pokemonInfo;
   }
 });
 
-function pokemonPage() {
+function pokemonDetails(id) {
+  var pokemonObject = {
+    pokemon_id: id,
+    image: null,
+    types: [],
+    flavor_text: null
+  };
 
+  var xhrTypeImage = new XMLHttpRequest();
+  xhrTypeImage.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
+  xhrTypeImage.responseType = 'json';
+  xhrTypeImage.addEventListener('load', function () {
+    pokemonObject.image = xhrTypeImage.response.sprites.other['official-artwork'].front_default;
+    for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImage.response.types.length; typeIndexAPI++) {
+      pokemonObject.types.push(xhrTypeImage.response.types[typeIndexAPI].type.name);
+    }
+  });
+  xhrTypeImage.send();
+
+  return pokemonObject;
 }
