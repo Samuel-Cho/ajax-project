@@ -52,15 +52,15 @@ body {
   outline: none;
 }
 
-.kanto {
+.kanto-button {
   background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
 }
 
-.johto {
+.johto-button {
   background: linear-gradient(180deg, #ffd700 40.63%, rgba(255, 255, 255, 0) 60%), #c0c0c0;
 }
 
-.caught {
+.caught-button {
   background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
 }
 

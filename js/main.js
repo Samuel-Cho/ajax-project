@@ -18,6 +18,13 @@ $buttonContainer.addEventListener('click', function (event) {
       $region[regionIndex].className = 'region';
     }
     closestRegion.className = 'select region';
+    if (closestRegion.id === 'kanto') {
+      $pokemonList.className = 'pokemon-list kanto-list';
+    } else if (closestRegion.id === 'johto') {
+      $pokemonList.className = 'pokemon-list johto-list';
+    } else {
+      $pokemonList.className = 'pokemon-list caught-list';
+    }
   }
 });
 
@@ -44,18 +51,29 @@ function capitalize(word) {
 }
 
 var kantoList = [];
-// var johtoList = [];
+var johtoList = [];
 // var caughtList = [];
+// var kantoNode = null;
+// var johtoNode = null;
 
-if ($pokemonList.className === 'pokemon-list kanto-list') {
-  var xhrKanto = new XMLHttpRequest();
-  xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
-  xhrKanto.responseType = 'json';
-  xhrKanto.addEventListener('load', function () {
-    for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
-      kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
-      createList(kantoList[kantoIndex]);
-    }
-  });
-  xhrKanto.send();
-}
+var xhrKanto = new XMLHttpRequest();
+xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
+xhrKanto.responseType = 'json';
+xhrKanto.addEventListener('load', function () {
+  for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
+    kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
+    createList(kantoList[kantoIndex]);
+  }
+});
+xhrKanto.send();
+
+var xhrJohto = new XMLHttpRequest();
+xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
+xhrJohto.responseType = 'json';
+xhrJohto.addEventListener('load', function () {
+  for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
+    johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
+    createList(johtoList[johtoIndex]);
+  }
+});
+xhrJohto.send();
