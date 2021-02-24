@@ -2,11 +2,6 @@
   display: none !important;
 }
 
-main {
-  position: relative;
-  height: 100vh;
-}
-
 .app-title {
   display: flex;
   flex-direction: column;
@@ -14,7 +9,6 @@ main {
 }
 
 .app-name {
-  margin: 0;
   text-align: center;
 }
 
