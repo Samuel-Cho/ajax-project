@@ -14,24 +14,27 @@ $buttonContainer.addEventListener('click', function (event) {
   // console.log(event.target.tagName);
 });
 
-// function createList(pokemonEntry) {
-//   var liPokemon = document.createElement('li');
-//   li
-// }
+function createList(pokemonEntry) {
+  var liPokemon = document.createElement('li');
+  liPokemon.setAttribute('class', 'pokemon-entry');
+  var pokemonName = document.createTextNode(pokemonEntry);
+  liPokemon.appendChild(pokemonName);
+  $pokemonList.appendChild(liPokemon);
+}
 
-// function capitalize(word) {
-//   var capitalizedWord = '';
-//   var i = 0;
-//   while (i < word.length) {
-//     if (i === 0) {
-//       capitalizedWord += word[i].toUpperCase();
-//     } else {
-//       capitalizedWord += word[i].toLowerCase();
-//     }
-//     i++;
-//   }
-//   return capitalizedWord;
-// }
+function capitalize(word) {
+  var capitalizedWord = '';
+  var i = 0;
+  while (i < word.length) {
+    if (i === 0) {
+      capitalizedWord += word[i].toUpperCase();
+    } else {
+      capitalizedWord += word[i].toLowerCase();
+    }
+    i++;
+  }
+  return capitalizedWord;
+}
 
 var kantoList = [];
 // var johtoList = [];
@@ -43,19 +46,9 @@ if ($pokemonList.className === 'pokemon-list kanto-list') {
   xhrKanto.responseType = 'json';
   xhrKanto.addEventListener('load', function () {
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
-      kantoList.push(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name);
+      kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
+      createList(kantoList[kantoIndex]);
     }
-    // console.log('kantoList:', kantoList);
   });
   xhrKanto.send();
 }
-
-// var xhr = new XMLHttpRequest();
-// xhr.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
-// xhr.responseType = 'json';
-// xhr.addEventListener('load', function() {
-//   console.log('status:', xhr.status);
-//   console.log('response:', xhr.response);
-//   console.log('test:', xhr.response.pokemon_entries[0].pokemon_species.name)
-// });
-// xhr.send();
