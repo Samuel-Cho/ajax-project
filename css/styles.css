@@ -1,0 +1,107 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.pokeball-top {
+  height: 51.5vh;
+  background-color: #ff3030;
+  border-bottom: 22px solid black;
+}
+
+.app-title {
+  height: 100%;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-name {
+  text-align: center;
+}
+
+.pokeball-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.press-here {
+  height: 153px;
+  width: 153px;
+  font-size: 16px;
+  border-radius: 50%;
+  border: 20px solid black;
+  background-color: white;
+}
+
+.press-here:focus {
+  outline: none;
+}
+
+.modal-background {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(196, 196, 196, 0.83);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 26px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.region {
+  text-align: center;
+}
+
+.region-button {
+  height: 47px;
+  width: 47px;
+  border-radius: 50%;
+  border: none;
+}
+
+.region-button:focus {
+  outline: none;
+}
+
+.kanto-button {
+  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
+}
+
+.johto-button {
+  background: linear-gradient(180deg, #ffd700 40.63%, rgba(255, 255, 255, 0) 60%), #c0c0c0;
+}
+
+.caught-button {
+  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
+}
+
+.select {
+  text-decoration: underline;
+}
+
+.list-container {
+  background: rgba(255, 255, 255, 0.75);
+  height: 77%;
+  width: 86%;
+  position: absolute;
+  padding-left: 15px;
+  overflow-y: auto;
+
+  /* width: 323px;
+  height: 515px; */
+}
+
+ol {
+  list-style-position: inside;
+}
+
+li {
+  font-size: 25px;
+}

@@ -1,0 +1,7 @@
+.hidden {
+  display: none !important;
+}
+
+ol {
+  padding: 0;
+}
