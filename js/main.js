@@ -2,6 +2,7 @@ var $pressHereButton = document.querySelector('.press-here');
 var $modal = document.querySelector('.modal-background');
 var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
+var $region = document.querySelectorAll('.region');
 var $pokemonList = document.querySelector('.pokemon-list');
 
 $pressHereButton.addEventListener('click', function (event) {
@@ -11,7 +12,13 @@ $pressHereButton.addEventListener('click', function (event) {
 });
 
 $buttonContainer.addEventListener('click', function (event) {
-  // console.log(event.target.tagName);
+  if (event.target.matches('button') || event.target.matches('p')) {
+    var closestRegion = event.target.closest('.region');
+    for (var regionIndex = 0; regionIndex < $region.length; regionIndex++) {
+      $region[regionIndex].className = 'region';
+    }
+    closestRegion.className = 'select region';
+  }
 });
 
 function createList(pokemonEntry) {
