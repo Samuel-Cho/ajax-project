@@ -9,7 +9,12 @@ var johtoList = [];
 // var caughtList = [];
 var kantoOl = null;
 var johtoOl = null;
-// var pokemonInfo = [];
+var pokemonObject = {
+  pokemon_id: null,
+  image: null,
+  types: [],
+  flavorText: null
+};
 
 $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
@@ -102,20 +107,21 @@ johtoDex();
 
 $listContainer.addEventListener('click', function pokemonPage(target) {
   if (event.target.matches('li')) {
-    var pokemonInfo = pokemonDetails(event.target.id);
-    // console.log(pokemonInfo);
-    return pokemonInfo;
+    pokemonObject = {
+      pokemon_id: null,
+      image: null,
+      types: [],
+      flavorText: null
+    };
+    pokemonObject.pokemon_id = event.target.id;
+    pokemonTypeImage(event.target.id);
+    pokemonFlavorText(event.target.id);
+    // console.log(pokemonObject);
+    return pokemonObject;
   }
 });
 
-function pokemonDetails(id) {
-  var pokemonObject = {
-    pokemon_id: id,
-    image: null,
-    types: [],
-    flavor_text: null
-  };
-
+function pokemonTypeImage(id) {
   var xhrTypeImage = new XMLHttpRequest();
   xhrTypeImage.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhrTypeImage.responseType = 'json';
@@ -126,6 +132,19 @@ function pokemonDetails(id) {
     }
   });
   xhrTypeImage.send();
+}
 
-  return pokemonObject;
+function pokemonFlavorText(id) {
+  var xhrFlavorText = new XMLHttpRequest();
+  xhrFlavorText.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
+  xhrFlavorText.responseType = 'json';
+  xhrFlavorText.addEventListener('load', function () {
+    for (var ftIndex = (xhrFlavorText.response.flavor_text_entries.length - 1); ftIndex >= 0; ftIndex--) {
+      if (xhrFlavorText.response.flavor_text_entries[ftIndex].language.name === 'en') {
+        pokemonObject.flavorText = xhrFlavorText.response.flavor_text_entries[ftIndex].flavor_text;
+        break;
+      }
+    }
+  });
+  xhrFlavorText.send();
 }
