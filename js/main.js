@@ -98,3 +98,13 @@ function johtoDex() {
 }
 
 johtoDex();
+
+$listContainer.addEventListener('click', function (target) {
+  if (event.target.matches('li')) {
+    pokemonPage();
+  }
+});
+
+function pokemonPage() {
+
+}
