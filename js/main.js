@@ -36,7 +36,7 @@ $buttonContainer.addEventListener('click', function (event) {
       kantoOl.className = 'hidden pokemon-list kanto-list';
       johtoOl.className = 'pokemon-list johto-list';
     } else {
-      // $pokemonList.className = 'pokemon-list caught-list';
+      // for caught list
     }
   }
 });
@@ -117,6 +117,11 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     pokemonTypeImage(event.target.id);
     pokemonFlavorText(event.target.id);
     // console.log(pokemonObject);
+    for (var x = 0; x < $region.length; x++) {
+      $region[x].className = 'region';
+    }
+    kantoOl.className = 'hidden pokemon-list kanto-list';
+    johtoOl.className = 'hidden pokemon-list johto-list';
     return pokemonObject;
   }
 });
