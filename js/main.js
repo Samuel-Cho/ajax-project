@@ -4,6 +4,11 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
+var kantoList = [];
+var johtoList = [];
+// var caughtList = [];
+var kantoOl = null;
+var johtoOl = null;
 
 $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
@@ -53,41 +58,43 @@ function capitalize(word) {
   return capitalizedWord;
 }
 
-var kantoList = [];
-var johtoList = [];
-// var caughtList = [];
-var kantoOl = null;
-var johtoOl = null;
+function kantoDex() {
+  var xhrKanto = new XMLHttpRequest();
+  xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
+  xhrKanto.responseType = 'json';
+  xhrKanto.addEventListener('load', function () {
+    kantoOl = document.createElement('ol');
+    kantoOl.setAttribute('class', 'pokemon-list kanto-list');
+    for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
+      kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
+      var kantoLi = createList(kantoList[kantoIndex]);
+      kantoOl.appendChild(kantoLi);
+    }
+    $listContainer.appendChild(kantoOl);
+  });
+  xhrKanto.send();
+}
 
-var xhrKanto = new XMLHttpRequest();
-xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
-xhrKanto.responseType = 'json';
-xhrKanto.addEventListener('load', function () {
-  kantoOl = document.createElement('ol');
-  kantoOl.setAttribute('class', 'pokemon-list kanto-list');
-  for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
-    kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
-    var kantoLi = createList(kantoList[kantoIndex]);
-    kantoOl.appendChild(kantoLi);
-  }
-  $listContainer.appendChild(kantoOl);
-});
-xhrKanto.send();
+kantoDex();
 
-var xhrJohto = new XMLHttpRequest();
-xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
-xhrJohto.responseType = 'json';
-xhrJohto.addEventListener('load', function () {
-  johtoOl = document.createElement('ol');
-  johtoOl.setAttribute('class', 'hidden pokemon-list johto-list');
-  johtoOl.setAttribute('start', '152');
-  for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
-    johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
-  }
-  for (var j = 0; j < johtoList.length; j++) {
-    var johtoLi = createList(johtoList[j]);
-    johtoOl.appendChild(johtoLi);
-  }
-  $listContainer.appendChild(johtoOl);
-});
-xhrJohto.send();
+function johtoDex() {
+  var xhrJohto = new XMLHttpRequest();
+  xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
+  xhrJohto.responseType = 'json';
+  xhrJohto.addEventListener('load', function () {
+    johtoOl = document.createElement('ol');
+    johtoOl.setAttribute('class', 'hidden pokemon-list johto-list');
+    johtoOl.setAttribute('start', '152');
+    for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
+      johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
+    }
+    for (var j = 0; j < johtoList.length; j++) {
+      var johtoLi = createList(johtoList[j]);
+      johtoOl.appendChild(johtoLi);
+    }
+    $listContainer.appendChild(johtoOl);
+  });
+  xhrJohto.send();
+}
+
+johtoDex();

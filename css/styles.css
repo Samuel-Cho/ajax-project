@@ -2,12 +2,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.modal-background {
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(196, 196, 196, 0.83);
-}
-
 .pokeball-top {
   height: 51.5vh;
   background-color: #ff3030;
@@ -17,6 +11,20 @@ body {
 .app-title {
   height: 100%;
   font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-name {
+  text-align: center;
+}
+
+.pokeball-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .press-here {
@@ -30,6 +38,16 @@ body {
 
 .press-here:focus {
   outline: none;
+}
+
+.modal-background {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(196, 196, 196, 0.83);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 26px;
 }
 
 .button-container {
@@ -72,10 +90,12 @@ body {
   background: rgba(255, 255, 255, 0.75);
   height: 77%;
   width: 86%;
+  position: absolute;
+  padding-left: 15px;
+  overflow-y: auto;
 
   /* width: 323px;
   height: 515px; */
-  overflow-y: auto;
 }
 
 ol {
