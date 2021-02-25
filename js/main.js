@@ -4,7 +4,6 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
-var $caughtButton = null;
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -198,19 +197,29 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divPokemonPage.appendChild(pPokemonFT);
 
-    var buttonCaught = document.createElement('button');
+    var buttonCatch = document.createElement('button');
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
-        buttonCaught.setAttribute('class', 'catch caught');
+        buttonCatch.setAttribute('class', 'catch caught');
         break;
       } else {
-        buttonCaught.setAttribute('class', 'catch not-caught');
+        buttonCatch.setAttribute('class', 'catch not-caught');
       }
     }
-    divPokemonPage.appendChild(buttonCaught);
+    divPokemonPage.appendChild(buttonCatch);
 
-    $caughtButton = document.querySelector('.catch');
-    $caughtButton.addEventListener('click', catchPokemon);
+    buttonCatch.addEventListener('click', catchPokemon);
+
+    function catchPokemon(event) {
+      if (buttonCatch.className === 'catch not-caught') {
+        buttonCatch.className = 'catch caught';
+        data.caughtList.push(pokemonObject);
+      }
+      data.caughtList.sort(function (a, b) {
+        return a.number - b.number;
+      });
+      // console.log(data);
+    }
   });
   xhrFlavorText.send();
 }
@@ -219,15 +228,4 @@ function createPokemonPage(pokemonObject) {
   var divPokemonEntry = document.createElement('div');
   divPokemonEntry.setAttribute('class', 'pokemon-page');
   return divPokemonEntry;
-}
-
-function catchPokemon(event) {
-  if ($caughtButton.className === 'catch not-caught') {
-    $caughtButton.className = 'catch caught';
-    data.caughtList.push(pokemonObject);
-  }
-  data.caughtList.sort(function (a, b) {
-    return a.number - b.number;
-  });
-  // console.log(data);
 }
