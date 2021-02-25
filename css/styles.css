@@ -138,14 +138,17 @@ li,
   padding: 5px;
 }
 
+.not-caught,
+.caught {
+  margin-top: 8px;
+}
+
 .not-caught {
   background: radial-gradient(50% 50% at 50% 50%, #fff 84.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
-  margin-top: 8px;
 }
 
 .caught {
   background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%), #ff3030;
-  margin-top: 8px;
 }
 
 .region-button:focus,
