@@ -30,12 +30,19 @@ $buttonContainer.addEventListener('click', function (event) {
       $region[regionIndex].className = 'region';
     }
     closestRegion.className = 'select region';
+    var $pokemonPageHidden = document.querySelector('.pokemon-page');
     if (closestRegion.id === 'kanto') {
       kantoOl.className = 'pokemon-list kanto-list';
       johtoOl.className = 'hidden pokemon-list johto-list';
+      if ($pokemonPageHidden !== null) {
+        $pokemonPageHidden.remove();
+      }
     } else if (closestRegion.id === 'johto') {
       kantoOl.className = 'hidden pokemon-list kanto-list';
       johtoOl.className = 'pokemon-list johto-list';
+      if ($pokemonPageHidden !== null) {
+        $pokemonPageHidden.remove();
+      }
     } else {
       // for caught list
     }
