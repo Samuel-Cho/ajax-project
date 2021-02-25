@@ -220,4 +220,7 @@ function caughtPokemon(event) {
     $notCaughtButton.className = 'caught';
     data.caughtList.push(pokemonObject);
   }
+  data.caughtList.sort(function (a, b) {
+    return a.number - b.number;
+  });
 }
