@@ -10,11 +10,12 @@ var johtoList = [];
 var kantoOl = null;
 var johtoOl = null;
 var pokemonObject = {
-  pokemon_id: null,
+  pokemon_name: null,
   image: null,
   types: [],
   flavorText: null
 };
+var divPokemonPage = null;
 
 $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
@@ -108,21 +109,20 @@ johtoDex();
 $listContainer.addEventListener('click', function pokemonPage(target) {
   if (event.target.matches('li')) {
     pokemonObject = {
-      pokemon_id: null,
+      pokemon_name: null,
       image: null,
       types: [],
       flavorText: null
     };
-    pokemonObject.pokemon_id = event.target.id;
-    pokemonTypeImage(event.target.id);
-    pokemonFlavorText(event.target.id);
-    // console.log(pokemonObject);
     for (var x = 0; x < $region.length; x++) {
       $region[x].className = 'region';
     }
     kantoOl.className = 'hidden pokemon-list kanto-list';
     johtoOl.className = 'hidden pokemon-list johto-list';
-    return pokemonObject;
+    pokemonObject.pokemon_name = event.target.id;
+    divPokemonPage = createPokemonPage(pokemonObject);
+    pokemonTypeImage(event.target.id);
+    $listContainer.appendChild(divPokemonPage);
   }
 });
 
@@ -135,6 +135,34 @@ function pokemonTypeImage(id) {
     for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImage.response.types.length; typeIndexAPI++) {
       pokemonObject.types.push(xhrTypeImage.response.types[typeIndexAPI].type.name);
     }
+    var imgPokemon = document.createElement('img');
+    imgPokemon.setAttribute('class', 'pokemon-img');
+    imgPokemon.setAttribute('src', pokemonObject.image);
+    imgPokemon.setAttribute('alt', 'Pokemon Image');
+    divPokemonPage.appendChild(imgPokemon);
+
+    var divPokemonNTContainer = document.createElement('div');
+    divPokemonNTContainer.setAttribute('class', 'pokemon-nt-container');
+    divPokemonPage.appendChild(divPokemonNTContainer);
+
+    var pPokemonName = document.createElement('p');
+    pPokemonName.setAttribute('class', 'pokemon-name');
+    var tnPokemonName = document.createTextNode(capitalize(pokemonObject.pokemon_name));
+    pPokemonName.appendChild(tnPokemonName);
+    divPokemonNTContainer.appendChild(pPokemonName);
+
+    var pPokemonTypes = document.createElement('p');
+    pPokemonTypes.setAttribute('class', 'pokemon-types');
+    var typesVar = '';
+    for (var y = 0; y < pokemonObject.types.length; y++) {
+      typesVar += capitalize(pokemonObject.types[y]) + '/';
+    }
+    typesVar = typesVar.slice(0, typesVar.length - 1);
+    var tnPokemonTypes = document.createTextNode(typesVar);
+    pPokemonTypes.appendChild(tnPokemonTypes);
+    divPokemonNTContainer.appendChild(pPokemonTypes);
+
+    pokemonFlavorText(id);
   });
   xhrTypeImage.send();
 }
@@ -150,6 +178,21 @@ function pokemonFlavorText(id) {
         break;
       }
     }
+    var pPokemonFT = document.createElement('p');
+    pPokemonFT.setAttribute('class', 'pokemon-flavor-text');
+    var tnPokemonFT = document.createTextNode(pokemonObject.flavorText);
+    pPokemonFT.appendChild(tnPokemonFT);
+    divPokemonPage.appendChild(pPokemonFT);
+
+    var buttonNotCaught = document.createElement('button');
+    buttonNotCaught.setAttribute('class', 'not-caught');
+    divPokemonPage.appendChild(buttonNotCaught);
   });
   xhrFlavorText.send();
+}
+
+function createPokemonPage(pokemonObject) {
+  var divPokemonEntry = document.createElement('div');
+  divPokemonEntry.setAttribute('class', 'pokemon-page');
+  return divPokemonEntry;
 }
