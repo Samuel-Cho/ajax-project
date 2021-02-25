@@ -156,3 +156,8 @@ li,
 .caught:focus {
   outline: none;
 }
+
+.caught-pokemon-img {
+  width: 120px;
+  margin: 10px 20px;
+}
