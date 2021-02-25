@@ -126,7 +126,8 @@ function johtoDex() {
 johtoDex();
 
 $listContainer.addEventListener('click', function pokemonPage(target) {
-  if (event.target.matches('li')) {
+  if (event.target.matches('li') || event.target.matches('img')) {
+    var selectedPokemon = event.target.closest('.pokemon-entry');
     pokemonObject = {
       pokemon_name: null,
       image: null,
@@ -141,9 +142,9 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     if (caughtOl !== null) {
       caughtOl.className = 'hidden caught-list';
     }
-    pokemonObject.pokemon_name = event.target.id;
+    pokemonObject.pokemon_name = selectedPokemon.id;
     divPokemonPage = createPokemonPage(pokemonObject);
-    pokemonTypeImageId(event.target.id);
+    pokemonTypeImageId(selectedPokemon.id);
     var $pokemonPage = document.querySelector('.pokemon-page');
     if ($pokemonPage === null) {
       $listContainer.appendChild(divPokemonPage);
@@ -152,32 +153,6 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     }
   }
 });
-
-// $listContainer.addEventListener('click', function pokemonPage(target) {
-//   if (event.target.matches('li') || event.target.matches('img')) {
-
-//     pokemonObject = {
-//       pokemon_name: null,
-//       image: null,
-//       types: [],
-//       flavorText: null
-//     };
-//     for (var x = 0; x < $region.length; x++) {
-//       $region[x].className = 'region';
-//     }
-//     kantoOl.className = 'hidden kanto-list';
-//     johtoOl.className = 'hidden johto-list';
-//     caughtOl.className = 'hidden caught-list';
-//     pokemonObject.pokemon_name = event.target.id;
-//     divPokemonPage = createPokemonPage(pokemonObject);
-//     pokemonTypeImageId(event.target.id);
-//     var $pokemonPage = document.querySelector('.pokemon-page');
-//     if ($pokemonPage === null) {
-//       $listContainer.appendChild(divPokemonPage);
-//     } else {
-//       $pokemonPage.replaceWith(divPokemonPage);
-//     }
-// });
 
 function pokemonTypeImageId(id) {
   var xhrTypeImageId = new XMLHttpRequest();
