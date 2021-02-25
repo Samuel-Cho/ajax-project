@@ -214,6 +214,7 @@ function pokemonFlavorText(id) {
     divPokemonPage.appendChild(pPokemonFT);
 
     var buttonCatch = document.createElement('button');
+    buttonCatch.setAttribute('class', 'catch not-caught');
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
         buttonCatch.setAttribute('class', 'catch caught');
