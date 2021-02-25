@@ -59,7 +59,8 @@ body {
   text-align: center;
 }
 
-.region-button {
+.region-button,
+.not-caught {
   height: 47px;
   width: 47px;
   border-radius: 50%;
@@ -91,7 +92,7 @@ body {
   height: 77%;
   width: 86%;
   position: absolute;
-  padding-left: 15px;
+  padding: 15px;
   overflow-y: auto;
 
   /* width: 323px;
@@ -102,6 +103,49 @@ ol {
   list-style-position: inside;
 }
 
-li {
+li,
+.pokemon-name {
   font-size: 25px;
 }
+
+.pokemon-page {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-img {
+  width: 201px;
+  margin-top: 15px;
+}
+
+.pokemon-nt-container {
+  margin-top: 15px;
+}
+
+.pokemon-types {
+  margin: 5px auto;
+}
+
+.pokemon-name {
+  margin: 0 auto;
+}
+
+.pokemon-flavor-text {
+  width: 245px;
+  height: 84px;
+  overflow-y: auto;
+  border: 5px ridge;
+  padding: 5px;
+}
+
+.not-caught {
+  background: radial-gradient(50% 50% at 50% 50%, #fff 84.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
+  margin-top: 8px;
+}
+
+/* .caught {
+  background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FF3030;
+} */
