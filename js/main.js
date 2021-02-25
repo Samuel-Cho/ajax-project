@@ -122,7 +122,12 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     pokemonObject.pokemon_name = event.target.id;
     divPokemonPage = createPokemonPage(pokemonObject);
     pokemonTypeImage(event.target.id);
-    $listContainer.appendChild(divPokemonPage);
+    var $pokemonPage = document.querySelector('.pokemon-page');
+    if ($pokemonPage === null) {
+      $listContainer.appendChild(divPokemonPage);
+    } else {
+      $pokemonPage.replaceWith(divPokemonPage);
+    }
   }
 });
 
