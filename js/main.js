@@ -215,5 +215,9 @@ function createPokemonPage(pokemonObject) {
 }
 
 function caughtPokemon(event) {
-  $notCaughtButton.className = 'caught';
+  // console.log('button clicked');
+  if ($notCaughtButton.className === 'not-caught') {
+    $notCaughtButton.className = 'caught';
+    data.caughtList.push(pokemonObject);
+  }
 }
