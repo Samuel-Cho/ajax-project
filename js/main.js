@@ -6,14 +6,14 @@ var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var kantoList = [];
 var johtoList = [];
-// var caughtList = [];
 var kantoOl = null;
 var johtoOl = null;
 var pokemonObject = {
   pokemon_name: null,
   image: null,
   types: [],
-  flavorText: null
+  flavorText: null,
+  number: null
 };
 var divPokemonPage = null;
 
@@ -128,7 +128,7 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     johtoOl.className = 'hidden pokemon-list johto-list';
     pokemonObject.pokemon_name = event.target.id;
     divPokemonPage = createPokemonPage(pokemonObject);
-    pokemonTypeImage(event.target.id);
+    pokemonTypeImageId(event.target.id);
     var $pokemonPage = document.querySelector('.pokemon-page');
     if ($pokemonPage === null) {
       $listContainer.appendChild(divPokemonPage);
@@ -138,14 +138,15 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
   }
 });
 
-function pokemonTypeImage(id) {
-  var xhrTypeImage = new XMLHttpRequest();
-  xhrTypeImage.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
-  xhrTypeImage.responseType = 'json';
-  xhrTypeImage.addEventListener('load', function () {
-    pokemonObject.image = xhrTypeImage.response.sprites.other['official-artwork'].front_default;
-    for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImage.response.types.length; typeIndexAPI++) {
-      pokemonObject.types.push(xhrTypeImage.response.types[typeIndexAPI].type.name);
+function pokemonTypeImageId(id) {
+  var xhrTypeImageId = new XMLHttpRequest();
+  xhrTypeImageId.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
+  xhrTypeImageId.responseType = 'json';
+  xhrTypeImageId.addEventListener('load', function () {
+    pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default;
+    pokemonObject.number = xhrTypeImageId.response.id;
+    for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImageId.response.types.length; typeIndexAPI++) {
+      pokemonObject.types.push(xhrTypeImageId.response.types[typeIndexAPI].type.name);
     }
     var imgPokemon = document.createElement('img');
     imgPokemon.setAttribute('class', 'pokemon-img');
@@ -176,7 +177,7 @@ function pokemonTypeImage(id) {
 
     pokemonFlavorText(id);
   });
-  xhrTypeImage.send();
+  xhrTypeImageId.send();
 }
 
 function pokemonFlavorText(id) {
