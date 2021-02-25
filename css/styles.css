@@ -60,15 +60,12 @@ body {
 }
 
 .region-button,
-.not-caught {
+.not-caught,
+.caught {
   height: 47px;
   width: 47px;
   border-radius: 50%;
   border: none;
-}
-
-.region-button:focus {
-  outline: none;
 }
 
 .kanto-button {
@@ -146,6 +143,13 @@ li,
   margin-top: 8px;
 }
 
-/* .caught {
-  background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FF3030;
-} */
+.caught {
+  background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%), #ff3030;
+  margin-top: 8px;
+}
+
+.region-button:focus,
+.not-caught:focus,
+.caught:focus {
+  outline: none;
+}

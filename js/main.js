@@ -4,6 +4,7 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
+var $notCaughtButton = null;
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -200,6 +201,9 @@ function pokemonFlavorText(id) {
     var buttonNotCaught = document.createElement('button');
     buttonNotCaught.setAttribute('class', 'not-caught');
     divPokemonPage.appendChild(buttonNotCaught);
+
+    $notCaughtButton = document.querySelector('.not-caught');
+    $notCaughtButton.addEventListener('click', caughtPokemon);
   });
   xhrFlavorText.send();
 }
@@ -208,4 +212,8 @@ function createPokemonPage(pokemonObject) {
   var divPokemonEntry = document.createElement('div');
   divPokemonEntry.setAttribute('class', 'pokemon-page');
   return divPokemonEntry;
+}
+
+function caughtPokemon(event) {
+  $notCaughtButton.className = 'caught';
 }
