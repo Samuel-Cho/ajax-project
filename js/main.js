@@ -4,7 +4,7 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
-var $notCaughtButton = null;
+var $caughtButton = null;
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -198,12 +198,19 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divPokemonPage.appendChild(pPokemonFT);
 
-    var buttonNotCaught = document.createElement('button');
-    buttonNotCaught.setAttribute('class', 'not-caught');
-    divPokemonPage.appendChild(buttonNotCaught);
+    var buttonCaught = document.createElement('button');
+    for (var z = 0; z < data.caughtList.length; z++) {
+      if (data.caughtList[z].pokemon_name === id) {
+        buttonCaught.setAttribute('class', 'catch caught');
+        break;
+      } else {
+        buttonCaught.setAttribute('class', 'catch not-caught');
+      }
+    }
+    divPokemonPage.appendChild(buttonCaught);
 
-    $notCaughtButton = document.querySelector('.not-caught');
-    $notCaughtButton.addEventListener('click', caughtPokemon);
+    $caughtButton = document.querySelector('.catch');
+    $caughtButton.addEventListener('click', catchPokemon);
   });
   xhrFlavorText.send();
 }
@@ -214,10 +221,9 @@ function createPokemonPage(pokemonObject) {
   return divPokemonEntry;
 }
 
-function caughtPokemon(event) {
-  // console.log('button clicked');
-  if ($notCaughtButton.className === 'not-caught') {
-    $notCaughtButton.className = 'caught';
+function catchPokemon(event) {
+  if ($caughtButton.className === 'catch not-caught') {
+    $caughtButton.className = 'catch caught';
     data.caughtList.push(pokemonObject);
   }
   data.caughtList.sort(function (a, b) {
