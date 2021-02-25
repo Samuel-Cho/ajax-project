@@ -223,4 +223,5 @@ function caughtPokemon(event) {
   data.caughtList.sort(function (a, b) {
     return a.number - b.number;
   });
+  // console.log(data);
 }
