@@ -8,6 +8,7 @@ var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
 var johtoOl = null;
+var caughtOl = null;
 var pokemonObject = {
   pokemon_name: null,
   image: null,
@@ -32,23 +33,26 @@ $buttonContainer.addEventListener('click', function (event) {
     closestRegion.className = 'select region';
     var $pokemonPageHidden = document.querySelector('.pokemon-page');
     if (closestRegion.id === 'kanto') {
-      kantoOl.className = 'pokemon-list kanto-list';
-      johtoOl.className = 'hidden pokemon-list johto-list';
+      kantoOl.className = 'kanto-list';
+      johtoOl.className = 'hidden johto-list';
+      caughtOl.className = 'hidden caught-list';
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
     } else if (closestRegion.id === 'johto') {
-      kantoOl.className = 'hidden pokemon-list kanto-list';
-      johtoOl.className = 'pokemon-list johto-list';
+      kantoOl.className = 'hidden kanto-list';
+      johtoOl.className = 'johto-list';
+      caughtOl.className = 'hidden caught-list';
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
     } else {
-      kantoOl.className = 'hidden pokemon-list kanto-list';
-      johtoOl.className = 'hidden pokemon-list johto-list';
+      kantoOl.className = 'hidden kanto-list';
+      johtoOl.className = 'hidden johto-list';
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
+      caughtDex(data);
     }
   }
 });
@@ -82,7 +86,7 @@ function kantoDex() {
   xhrKanto.responseType = 'json';
   xhrKanto.addEventListener('load', function () {
     kantoOl = document.createElement('ol');
-    kantoOl.setAttribute('class', 'pokemon-list kanto-list');
+    kantoOl.setAttribute('class', 'kanto-list');
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       var kantoLi = createList(kantoList[kantoIndex]);
@@ -101,7 +105,7 @@ function johtoDex() {
   xhrJohto.responseType = 'json';
   xhrJohto.addEventListener('load', function () {
     johtoOl = document.createElement('ol');
-    johtoOl.setAttribute('class', 'hidden pokemon-list johto-list');
+    johtoOl.setAttribute('class', 'hidden johto-list');
     johtoOl.setAttribute('start', '152');
     for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
       johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
@@ -128,8 +132,9 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     for (var x = 0; x < $region.length; x++) {
       $region[x].className = 'region';
     }
-    kantoOl.className = 'hidden pokemon-list kanto-list';
-    johtoOl.className = 'hidden pokemon-list johto-list';
+    kantoOl.className = 'hidden kanto-list';
+    johtoOl.className = 'hidden johto-list';
+    caughtOl.className = 'hidden caught-list';
     pokemonObject.pokemon_name = event.target.id;
     divPokemonPage = createPokemonPage(pokemonObject);
     pokemonTypeImageId(event.target.id);
@@ -232,4 +237,26 @@ function createPokemonPage(pokemonObject) {
   var divPokemonEntry = document.createElement('div');
   divPokemonEntry.setAttribute('class', 'pokemon-page');
   return divPokemonEntry;
+}
+
+function caughtDex(data) {
+  var $caughtListHidden = document.querySelector('.caught-list');
+  if ($caughtListHidden !== null) {
+    $caughtListHidden.remove();
+  }
+  caughtOl = document.createElement('ol');
+  caughtOl.setAttribute('class', 'caught-list');
+  for (var caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
+    var caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
+    var caughtPokemonLi = createList(caughtPokemonName);
+    caughtPokemonLi.setAttribute('value', data.caughtList[caughtIndex].number);
+    var caughtPokemonImage = document.createElement('img');
+    caughtPokemonImage.setAttribute('class', 'caught-pokemon-img');
+    caughtPokemonImage.setAttribute('src', data.caughtList[caughtIndex].image);
+    caughtPokemonImage.setAttribute('alt', 'Pokemon Image');
+    caughtPokemonLi.appendChild(caughtPokemonImage);
+    caughtOl.appendChild(caughtPokemonLi);
+  }
+  $listContainer.appendChild(caughtOl);
+  // console.log('caughtOl:', caughtOl);
 }
