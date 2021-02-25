@@ -44,7 +44,11 @@ $buttonContainer.addEventListener('click', function (event) {
         $pokemonPageHidden.remove();
       }
     } else {
-      // for caught list
+      kantoOl.className = 'hidden pokemon-list kanto-list';
+      johtoOl.className = 'hidden pokemon-list johto-list';
+      if ($pokemonPageHidden !== null) {
+        $pokemonPageHidden.remove();
+      }
     }
   }
 });
