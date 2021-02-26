@@ -231,11 +231,18 @@ function pokemonFlavorText(id) {
       if (buttonCatch.className === 'catch not-caught') {
         buttonCatch.className = 'catch caught';
         data.caughtList.push(pokemonObject);
+      } else {
+        buttonCatch.className = 'catch not-caught';
+        for (var a = 0; a < data.caughtList.length; a++) {
+          if (data.caughtList[a].pokemon_name === id) {
+            data.caughtList.splice(a, 1);
+            break;
+          }
+        }
       }
       data.caughtList.sort(function (a, b) {
         return a.number - b.number;
       });
-      // console.log(data);
     }
   });
   xhrFlavorText.send();
@@ -269,5 +276,4 @@ function caughtDex(data) {
     caughtOl.appendChild(caughtPokemonLi);
   }
   $listContainer.appendChild(caughtOl);
-  // console.log('caughtOl:', caughtOl);
 }

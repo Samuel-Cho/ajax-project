@@ -107,15 +107,18 @@ li,
 
 .pokemon-page {
   text-align: center;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .pokemon-img {
   width: 201px;
-  margin-top: 15px;
+
+  /* margin-top: 15px; */
 }
 
 .pokemon-nt-container {
