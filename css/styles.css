@@ -107,16 +107,25 @@ body {
   padding: 15px;
   overflow-y: auto;
   background-color: #dcdcdc;
-  font-size: 26px;
+  font-size: 25px;
+}
+
+input {
+  width: 100%;
+}
+
+li,
+input,
+.pokemon-name {
+  font-size: 25px;
+}
+
+input:focus {
+  outline: none;
 }
 
 ol {
   list-style-position: inside;
-}
-
-li,
-.pokemon-name {
-  font-size: 25px;
 }
 
 .pokemon-page {

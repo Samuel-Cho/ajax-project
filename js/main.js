@@ -4,7 +4,7 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
-// var $searchContainer = document.querySelector('.search-container');
+var $searchContainer = document.querySelector('.search-container');
 // var nationalList = [];
 var kantoList = [];
 var johtoList = [];
@@ -34,6 +34,8 @@ $buttonContainer.addEventListener('click', function (event) {
     }
     closestRegion.className = 'select region';
     var $pokemonPageHidden = document.querySelector('.pokemon-page');
+    $listContainer.className = 'list-container';
+    $searchContainer.className = 'hidden search-container';
     if (closestRegion.id === 'kanto') {
       kantoOl.className = 'kanto-list';
       johtoOl.className = 'hidden johto-list';
@@ -59,6 +61,9 @@ $buttonContainer.addEventListener('click', function (event) {
         $pokemonPageHidden.remove();
       }
       caughtDex(data);
+    } else {
+      $listContainer.className = 'hidden list-container';
+      $searchContainer.className = 'search-container';
     }
   }
 });
