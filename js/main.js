@@ -5,7 +5,7 @@ var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
-// var nationalList = [];
+var nationalList = [];
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -100,6 +100,7 @@ function kantoDex() {
     kantoOl.setAttribute('class', 'kanto-list');
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
+      nationalList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       var kantoLi = createList(kantoList[kantoIndex]);
       kantoOl.appendChild(kantoLi);
     }
@@ -120,6 +121,7 @@ function johtoDex() {
     johtoOl.setAttribute('start', '152');
     for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
       johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
+      nationalList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
     }
     for (var j = 0; j < johtoList.length; j++) {
       var johtoLi = createList(johtoList[j]);
