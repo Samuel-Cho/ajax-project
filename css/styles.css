@@ -68,6 +68,10 @@ body {
   border: none;
 }
 
+.search-button {
+  background: linear-gradient(180deg, #8f00ff 40.1%, rgba(0, 0, 0, 0) 60%), #fff;
+}
+
 .kanto-button {
   background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
 }
@@ -94,6 +98,16 @@ body {
 
   /* width: 323px;
   height: 515px; */
+}
+
+.search-container {
+  max-height: 77%;
+  width: 86%;
+  position: absolute;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #dcdcdc;
+  font-size: 26px;
 }
 
 ol {

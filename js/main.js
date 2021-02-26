@@ -4,6 +4,8 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
+// var $searchContainer = document.querySelector('.search-container');
+// var nationalList = [];
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -50,7 +52,7 @@ $buttonContainer.addEventListener('click', function (event) {
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
-    } else {
+    } else if (closestRegion.id === 'caught') {
       kantoOl.className = 'hidden kanto-list';
       johtoOl.className = 'hidden johto-list';
       if ($pokemonPageHidden !== null) {

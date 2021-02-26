@@ -25,6 +25,10 @@
     </div>
     <div class="hidden modal-background">
       <div class="button-container">
+        <div class="region" id="search">
+          <button class="region-button search-button"></button>
+          <p class="region-text">Search</p>
+        </div>
         <div class="select region" id="kanto">
           <button class="region-button kanto-button"></button>
           <p class="region-text">Kanto</p>
@@ -40,6 +44,15 @@
       </div>
       <div class="list-container">
 
+      </div>
+      <div class="hidden search-container">
+        <input
+          list=""
+          type="text"
+          name="national-dex"
+          id="national-dex">
+        <datalist id="pokemonSuggestion">
+        </datalist>
       </div>
     </div>
   </main>
