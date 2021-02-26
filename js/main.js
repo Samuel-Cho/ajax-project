@@ -276,5 +276,4 @@ function caughtDex(data) {
     caughtOl.appendChild(caughtPokemonLi);
   }
   $listContainer.appendChild(caughtOl);
-  // console.log('caughtOl:', caughtOl);
 }
