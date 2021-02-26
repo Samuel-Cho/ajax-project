@@ -105,6 +105,8 @@ function kantoDex() {
       kantoOl.appendChild(kantoLi);
     }
     $listContainer.appendChild(kantoOl);
+    // console.log('kanto');
+    johtoDex();
   });
   xhrKanto.send();
 }
@@ -128,11 +130,13 @@ function johtoDex() {
       johtoOl.appendChild(johtoLi);
     }
     $listContainer.appendChild(johtoOl);
+    // console.log('johto')
+    createSearchList(nationalList);
   });
   xhrJohto.send();
 }
 
-johtoDex();
+// johtoDex();
 
 $listContainer.addEventListener('click', function pokemonPage(target) {
   if (event.target.matches('li') || event.target.matches('img')) {
@@ -285,4 +289,15 @@ function caughtDex(data) {
     caughtOl.appendChild(caughtPokemonLi);
   }
   $listContainer.appendChild(caughtOl);
+}
+
+function createSearchList(nationalList) {
+  var $dataList = document.querySelector('#pokemonSuggestion');
+  for (var nationalIndex = 0; nationalIndex < nationalList.length; nationalIndex++) {
+    var searchOption = document.createElement('option');
+    searchOption.setAttribute('value', nationalList[nationalIndex]);
+    searchOption.setAttribute('id', nationalList[nationalIndex].toLowerCase());
+    $dataList.appendChild(searchOption);
+  }
+  // console.log('search');
 }
