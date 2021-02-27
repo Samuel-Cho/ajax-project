@@ -105,13 +105,22 @@ body {
   width: 86%;
   position: absolute;
   padding: 15px;
-  overflow-y: auto;
   background-color: #dcdcdc;
   font-size: 25px;
+  overflow-y: auto;
 }
 
 input {
   width: 100%;
+}
+
+.search-list-container {
+  overflow-y: auto;
+  max-height: 513px;
+}
+
+.search-list {
+  list-style: none;
 }
 
 li,

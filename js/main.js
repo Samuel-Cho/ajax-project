@@ -5,6 +5,7 @@ var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
+// var $searchList = document.querySelector('.search-list');
 var nationalList = [];
 var kantoList = [];
 var johtoList = [];
@@ -131,7 +132,7 @@ function johtoDex() {
     }
     $listContainer.appendChild(johtoOl);
     // console.log('johto')
-    createSearchList(nationalList);
+    // createSearchList(nationalList);
   });
   xhrJohto.send();
 }
@@ -291,13 +292,41 @@ function caughtDex(data) {
   $listContainer.appendChild(caughtOl);
 }
 
-function createSearchList(nationalList) {
-  var $dataList = document.querySelector('#pokemonSuggestion');
-  for (var nationalIndex = 0; nationalIndex < nationalList.length; nationalIndex++) {
-    var searchOption = document.createElement('option');
-    searchOption.setAttribute('value', nationalList[nationalIndex]);
-    searchOption.setAttribute('id', nationalList[nationalIndex].toLowerCase());
-    $dataList.appendChild(searchOption);
-  }
+// function createSearchList(nationalList) {
+//   for (var nationalIndex = 0; nationalIndex < nationalList.length; nationalIndex++) {
+//     var searchSuggestion = document.createElement('li');
+//     var pokemonSuggestion = document.createTextNode(nationalList[nationalIndex]);
+//     searchSuggestion.appendChild(pokemonSuggestion);
+//     searchSuggestion.setAttribute('id', nationalList[nationalIndex].toLowerCase());
+//     $searchList.appendChild(searchSuggestion);
+//   }
+//   // console.log('search');
+// }
+
+var $searchListContainer = document.querySelector('.search-list-container');
+var olSearch = null;
+
+function createSearchList(name) {
+  olSearch = document.createElement('ol');
+  $searchListContainer.appendChild(olSearch);
+
+  var searchSuggestion = document.createElement('li');
+  var pokemonSuggestion = document.createTextNode(name);
+  searchSuggestion.appendChild(pokemonSuggestion);
+  searchSuggestion.setAttribute('id', name.toLowerCase());
+  olSearch.appendChild(searchSuggestion);
   // console.log('search');
 }
+
+var $searchBar = document.querySelector('#national-dex');
+$searchBar.addEventListener('keydown', function (event) {
+  // console.log($searchBar.value);
+  for (var g = 0; g < nationalList.length; g++) {
+    if (nationalList[g].includes($searchBar.value)) {
+      if (olSearch !== null) {
+        olSearch.remove();
+        createSearchList(nationalList[g]);
+      }
+    }
+  }
+});
