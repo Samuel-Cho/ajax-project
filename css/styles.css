@@ -107,28 +107,30 @@ body {
   padding: 15px;
   background-color: #f0f0f0;
   font-size: 25px;
-  overflow-y: auto;
-}
-
-input {
-  width: 100%;
+  overflow-y: hidden;
 }
 
 .search-list-container {
-  overflow-y: auto;
+  overflow-y: scroll;
   max-height: 513px;
 }
 
 .search-list {
   list-style: none;
   padding: 0;
-  margin: 15px 0;
+  padding-bottom: 40px;
+  margin-top: 0;
 }
 
 li,
 input,
 .pokemon-name {
   font-size: 25px;
+}
+
+input {
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 input:focus {
