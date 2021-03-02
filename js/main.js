@@ -5,7 +5,8 @@ var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
-// var $searchList = document.querySelector('.search-list');
+var $searchListContainer = document.querySelector('.search-list-container');
+var ulSearch = null;
 var nationalList = [];
 var kantoList = [];
 var johtoList = [];
@@ -106,7 +107,6 @@ function kantoDex() {
       kantoOl.appendChild(kantoLi);
     }
     $listContainer.appendChild(kantoOl);
-    // console.log('kanto');
     johtoDex();
   });
   xhrKanto.send();
@@ -131,15 +131,13 @@ function johtoDex() {
       johtoOl.appendChild(johtoLi);
     }
     $listContainer.appendChild(johtoOl);
-    // console.log('johto')
-    // createSearchList(nationalList);
   });
   xhrJohto.send();
 }
 
-// johtoDex();
+$listContainer.addEventListener('click', pokemonPage);
 
-$listContainer.addEventListener('click', function pokemonPage(target) {
+function pokemonPage(target) {
   if (event.target.matches('li') || event.target.matches('img')) {
     var selectedPokemon = event.target.closest('.pokemon-entry');
     pokemonObject = {
@@ -153,6 +151,8 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     }
     kantoOl.className = 'hidden kanto-list';
     johtoOl.className = 'hidden johto-list';
+    $listContainer.className = 'list-container';
+    $searchContainer.className = 'hidden search-container';
     if (caughtOl !== null) {
       caughtOl.className = 'hidden caught-list';
     }
@@ -166,7 +166,7 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
       $pokemonPage.replaceWith(divPokemonPage);
     }
   }
-});
+}
 
 function pokemonTypeImageId(id) {
   var xhrTypeImageId = new XMLHttpRequest();
@@ -292,10 +292,6 @@ function caughtDex(data) {
   $listContainer.appendChild(caughtOl);
 }
 
-// var $form = document.querySelector('form');
-var $searchListContainer = document.querySelector('.search-list-container');
-var ulSearch = null;
-
 function createSearchList() {
   var ulSearchList = document.createElement('ul');
   ulSearchList.setAttribute('class', 'search-list');
@@ -305,7 +301,6 @@ function createSearchList() {
 
 var $searchBar = document.querySelector('#nationaldex');
 $searchBar.addEventListener('input', function (event) {
-  // console.log($searchBar.value);
   ulSearch = createSearchList();
   for (var g = 0; g < nationalList.length; g++) {
     var lowerSearch = nationalList[g].toLowerCase();
@@ -320,4 +315,6 @@ $searchBar.addEventListener('input', function (event) {
   } else {
     $ul.replaceWith(ulSearch);
   }
+  var $searchList = document.querySelector('.search-list');
+  $searchList.addEventListener('click', pokemonPage);
 });
