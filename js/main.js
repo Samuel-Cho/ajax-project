@@ -314,14 +314,13 @@ function createSearchList() {
 }
 
 var $searchBar = document.querySelector('#nationaldex');
-$searchBar.addEventListener('keydown', function (event) {
+$searchBar.addEventListener('input', function (event) {
   // console.log($searchBar.value);
-  var searchArray = [];
   ulSearch = createSearchList();
   for (var g = 0; g < nationalList.length; g++) {
-    if (nationalList[g].includes($searchBar.value)) {
-      searchArray.push(nationalList[g]);
-      var searchLi = createList(searchArray[g]);
+    var lowerSearch = nationalList[g].toLowerCase();
+    if (lowerSearch.includes($searchBar.value.toLowerCase())) {
+      var searchLi = createList(nationalList[g]);
       ulSearch.appendChild(searchLi);
     }
   }
