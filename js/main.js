@@ -303,30 +303,66 @@ function caughtDex(data) {
 //   // console.log('search');
 // }
 
+// var $form = document.querySelector('form');
 var $searchListContainer = document.querySelector('.search-list-container');
-var olSearch = null;
+var ulSearch = null;
 
-function createSearchList(name) {
-  olSearch = document.createElement('ol');
-  $searchListContainer.appendChild(olSearch);
-
-  var searchSuggestion = document.createElement('li');
-  var pokemonSuggestion = document.createTextNode(name);
-  searchSuggestion.appendChild(pokemonSuggestion);
-  searchSuggestion.setAttribute('id', name.toLowerCase());
-  olSearch.appendChild(searchSuggestion);
-  // console.log('search');
+function createSearchList() {
+  var ulSearchList = document.createElement('ul');
+  $searchListContainer.appendChild(ulSearchList);
+  return ulSearchList;
 }
 
-var $searchBar = document.querySelector('#national-dex');
+var $searchBar = document.querySelector('#nationaldex');
 $searchBar.addEventListener('keydown', function (event) {
   // console.log($searchBar.value);
+  var searchArray = [];
+  ulSearch = createSearchList();
   for (var g = 0; g < nationalList.length; g++) {
     if (nationalList[g].includes($searchBar.value)) {
-      if (olSearch !== null) {
-        olSearch.remove();
-        createSearchList(nationalList[g]);
-      }
+      searchArray.push(nationalList[g]);
+      var searchLi = createList(searchArray[g]);
+      ulSearch.appendChild(searchLi);
     }
   }
+  var $ul = document.querySelector('ul');
+  if ($ul === null) {
+    $searchListContainer.appendChild(ulSearch);
+  } else {
+    $ul.replaceWith(ulSearch);
+  }
 });
+
+// function createSearchList(name) {
+//   ulSearch = document.createElement('ul');
+//   $searchListContainer.appendChild(ulSearch);
+
+//   var searchSuggestion = document.createElement('li');
+//   var pokemonSuggestion = document.createTextNode(name);
+//   searchSuggestion.appendChild(pokemonSuggestion);
+//   searchSuggestion.setAttribute('id', name.toLowerCase());
+//   ulSearch.appendChild(searchSuggestion);
+//   // console.log('search');
+// }
+
+// var $searchBar = document.querySelector('#national-dex');
+// $searchBar.addEventListener('keydown', function (event) {
+//   // console.log($searchBar.value);
+//   var searchArray = [];
+//   console.log($form.elements.nationaldex.value);
+//   for (var g = 0; g < nationalList.length; g++) {
+//     if (nationalList[g].includes($searchBar.value)) {
+//       searchArray.push(nationalList[g]);
+//       if (ulSearch !== null) {
+//         ulSearch.remove();
+//         for (var g = 0; g < searchArray.length; g++) {
+//           createSearchList(nationalList[g]);
+//         }
+//       } else {
+//         for (var h = 0; h < searchArray.length; h++) {
+//           createSearchList(nationalList[g]);
+//         }
+//       }
+//     }
+//   }
+// });
