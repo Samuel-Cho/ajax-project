@@ -292,23 +292,13 @@ function caughtDex(data) {
   $listContainer.appendChild(caughtOl);
 }
 
-// function createSearchList(nationalList) {
-//   for (var nationalIndex = 0; nationalIndex < nationalList.length; nationalIndex++) {
-//     var searchSuggestion = document.createElement('li');
-//     var pokemonSuggestion = document.createTextNode(nationalList[nationalIndex]);
-//     searchSuggestion.appendChild(pokemonSuggestion);
-//     searchSuggestion.setAttribute('id', nationalList[nationalIndex].toLowerCase());
-//     $searchList.appendChild(searchSuggestion);
-//   }
-//   // console.log('search');
-// }
-
 // var $form = document.querySelector('form');
 var $searchListContainer = document.querySelector('.search-list-container');
 var ulSearch = null;
 
 function createSearchList() {
   var ulSearchList = document.createElement('ul');
+  ulSearchList.setAttribute('class', 'search-list');
   $searchListContainer.appendChild(ulSearchList);
   return ulSearchList;
 }
@@ -331,37 +321,3 @@ $searchBar.addEventListener('input', function (event) {
     $ul.replaceWith(ulSearch);
   }
 });
-
-// function createSearchList(name) {
-//   ulSearch = document.createElement('ul');
-//   $searchListContainer.appendChild(ulSearch);
-
-//   var searchSuggestion = document.createElement('li');
-//   var pokemonSuggestion = document.createTextNode(name);
-//   searchSuggestion.appendChild(pokemonSuggestion);
-//   searchSuggestion.setAttribute('id', name.toLowerCase());
-//   ulSearch.appendChild(searchSuggestion);
-//   // console.log('search');
-// }
-
-// var $searchBar = document.querySelector('#national-dex');
-// $searchBar.addEventListener('keydown', function (event) {
-//   // console.log($searchBar.value);
-//   var searchArray = [];
-//   console.log($form.elements.nationaldex.value);
-//   for (var g = 0; g < nationalList.length; g++) {
-//     if (nationalList[g].includes($searchBar.value)) {
-//       searchArray.push(nationalList[g]);
-//       if (ulSearch !== null) {
-//         ulSearch.remove();
-//         for (var g = 0; g < searchArray.length; g++) {
-//           createSearchList(nationalList[g]);
-//         }
-//       } else {
-//         for (var h = 0; h < searchArray.length; h++) {
-//           createSearchList(nationalList[g]);
-//         }
-//       }
-//     }
-//   }
-// });
