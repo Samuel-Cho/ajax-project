@@ -4,6 +4,10 @@ var $appName = document.querySelector('.app-name');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
+var $searchContainer = document.querySelector('.search-container');
+var $searchListContainer = document.querySelector('.search-list-container');
+var ulSearch = null;
+var nationalList = [];
 var kantoList = [];
 var johtoList = [];
 var kantoOl = null;
@@ -32,6 +36,8 @@ $buttonContainer.addEventListener('click', function (event) {
     }
     closestRegion.className = 'select region';
     var $pokemonPageHidden = document.querySelector('.pokemon-page');
+    $listContainer.className = 'list-container';
+    $searchContainer.className = 'hidden search-container';
     if (closestRegion.id === 'kanto') {
       kantoOl.className = 'kanto-list';
       johtoOl.className = 'hidden johto-list';
@@ -50,13 +56,16 @@ $buttonContainer.addEventListener('click', function (event) {
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
-    } else {
+    } else if (closestRegion.id === 'caught') {
       kantoOl.className = 'hidden kanto-list';
       johtoOl.className = 'hidden johto-list';
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
       caughtDex(data);
+    } else {
+      $listContainer.className = 'hidden list-container';
+      $searchContainer.className = 'search-container';
     }
   }
 });
@@ -93,10 +102,12 @@ function kantoDex() {
     kantoOl.setAttribute('class', 'kanto-list');
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
+      nationalList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       var kantoLi = createList(kantoList[kantoIndex]);
       kantoOl.appendChild(kantoLi);
     }
     $listContainer.appendChild(kantoOl);
+    johtoDex();
   });
   xhrKanto.send();
 }
@@ -113,6 +124,7 @@ function johtoDex() {
     johtoOl.setAttribute('start', '152');
     for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
       johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
+      nationalList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
     }
     for (var j = 0; j < johtoList.length; j++) {
       var johtoLi = createList(johtoList[j]);
@@ -123,9 +135,9 @@ function johtoDex() {
   xhrJohto.send();
 }
 
-johtoDex();
+$listContainer.addEventListener('click', pokemonPage);
 
-$listContainer.addEventListener('click', function pokemonPage(target) {
+function pokemonPage(target) {
   if (event.target.matches('li') || event.target.matches('img')) {
     var selectedPokemon = event.target.closest('.pokemon-entry');
     pokemonObject = {
@@ -139,6 +151,8 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
     }
     kantoOl.className = 'hidden kanto-list';
     johtoOl.className = 'hidden johto-list';
+    $listContainer.className = 'list-container';
+    $searchContainer.className = 'hidden search-container';
     if (caughtOl !== null) {
       caughtOl.className = 'hidden caught-list';
     }
@@ -152,7 +166,7 @@ $listContainer.addEventListener('click', function pokemonPage(target) {
       $pokemonPage.replaceWith(divPokemonPage);
     }
   }
-});
+}
 
 function pokemonTypeImageId(id) {
   var xhrTypeImageId = new XMLHttpRequest();
@@ -277,3 +291,30 @@ function caughtDex(data) {
   }
   $listContainer.appendChild(caughtOl);
 }
+
+function createSearchList() {
+  var ulSearchList = document.createElement('ul');
+  ulSearchList.setAttribute('class', 'search-list');
+  $searchListContainer.appendChild(ulSearchList);
+  return ulSearchList;
+}
+
+var $searchBar = document.querySelector('#nationaldex');
+$searchBar.addEventListener('input', function (event) {
+  ulSearch = createSearchList();
+  for (var g = 0; g < nationalList.length; g++) {
+    var lowerSearch = nationalList[g].toLowerCase();
+    if (lowerSearch.includes($searchBar.value.toLowerCase())) {
+      var searchLi = createList(nationalList[g]);
+      ulSearch.appendChild(searchLi);
+    }
+  }
+  var $ul = document.querySelector('ul');
+  if ($ul === null) {
+    $searchListContainer.appendChild(ulSearch);
+  } else {
+    $ul.replaceWith(ulSearch);
+  }
+  var $searchList = document.querySelector('.search-list');
+  $searchList.addEventListener('click', pokemonPage);
+});

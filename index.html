@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-  </header>
   <main>
     <div class="homepage">
       <div class="pokeball-top">
@@ -25,6 +23,10 @@
     </div>
     <div class="hidden modal-background">
       <div class="button-container">
+        <div class="region" id="search">
+          <button class="region-button search-button"></button>
+          <p class="region-text">Search</p>
+        </div>
         <div class="select region" id="kanto">
           <button class="region-button kanto-button"></button>
           <p class="region-text">Kanto</p>
@@ -40,6 +42,17 @@
       </div>
       <div class="list-container">
 
+      </div>
+      <div class="hidden search-container">
+        <form>
+          <input
+            type="text"
+            name="nationaldex"
+            id="nationaldex">
+        </form>
+        <div class="search-list-container">
+
+        </div>
       </div>
     </div>
   </main>
