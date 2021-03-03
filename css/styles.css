@@ -200,3 +200,11 @@ ol {
   width: 120px;
   margin: 10px 20px;
 }
+
+.press-here:hover,
+.region-button:hover,
+.region-text:hover,
+.pokemon-entry:hover,
+.caught-pokemon-img:hover {
+  cursor: pointer;
+}
