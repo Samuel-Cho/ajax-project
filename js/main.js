@@ -138,7 +138,7 @@ function johtoDex() {
 $listContainer.addEventListener('click', pokemonPage);
 
 function pokemonPage(target) {
-  if (event.target.matches('li') || event.target.matches('img')) {
+  if (event.target.matches('li') || event.target.className === 'caught-pokemon-img') {
     var selectedPokemon = event.target.closest('.pokemon-entry');
     pokemonObject = {
       pokemon_name: null,

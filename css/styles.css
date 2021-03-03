@@ -208,3 +208,100 @@ ol {
 .caught-pokemon-img:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 320px) {
+  .pokemon-img {
+    width: 150px;
+  }
+
+  .search-list {
+    padding-bottom: 120px;
+  }
+}
+
+@media screen and (width: 568px) {
+  .press-here {
+    height: 130px;
+    width: 130px;
+  }
+}
+
+@media screen and (min-width: 568px) and (orientation: landscape) {
+  .modal-background {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+  }
+
+  .button-container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .region-button,
+  .not-caught,
+  .caught {
+    height: 45px;
+    width: 45px;
+  }
+
+  .region-text {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+
+  .list-container {
+    position: static;
+    height: 100%;
+  }
+
+  .pokemon-img {
+    width: 150px;
+  }
+
+  .pokemon-page {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1025px) and (orientation: landscape) {
+  .modal-background {
+    padding: 20px;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (min-width: 768px) and (orientation: portrait) {
+  .list-container {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    height: 80%;
+  }
+
+  .pokemon-img {
+    width: 230px;
+  }
+
+  .pokemon-name {
+    font-size: 30px;
+  }
+
+  .pokemon-type {
+    font-size: 1.2rem;
+  }
+
+  .pokemon-flavor-text {
+    width: 275px;
+    height: 100px;
+    border: 10px ridge;
+    font-size: 1.2rem;
+  }
+
+  .search-container {
+    top: 20%;
+    left: 7%;
+    max-height: 75%;
+  }
+}
