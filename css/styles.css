@@ -211,8 +211,37 @@ ol {
 .region-button:hover,
 .region-text:hover,
 .pokemon-entry:hover,
-.caught-pokemon-img:hover {
+.caught-pokemon-img:hover,
+.caught:hover,
+.not-caught:hover {
   cursor: pointer;
+}
+
+.region-button:hover,
+.not-caught:hover,
+.caught:hover,
+.press-here:hover {
+  background: rgb(243, 243, 133);
+}
+
+.loading {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (orientation: landscape) {
+  .loading {
+    height: 100%;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .loading {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -263,7 +292,7 @@ ol {
   }
 
   .list-container {
-    position: static;
+    position: relative;
     height: 100%;
   }
 

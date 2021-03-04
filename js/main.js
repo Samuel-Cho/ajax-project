@@ -21,6 +21,7 @@ var pokemonObject = {
   number: null
 };
 var divPokemonPage = null;
+var $loading = document.querySelector('.loading');
 
 $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
@@ -97,6 +98,7 @@ function kantoDex() {
   var xhrKanto = new XMLHttpRequest();
   xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrKanto.responseType = 'json';
+  xhrKanto.addEventListener('loadstart', loadingGif);
   xhrKanto.addEventListener('load', function () {
     kantoOl = document.createElement('ol');
     kantoOl.setAttribute('class', 'kanto-list');
@@ -119,6 +121,7 @@ function johtoDex() {
   xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrJohto.responseType = 'json';
   xhrJohto.addEventListener('load', function () {
+    loadingGif();
     johtoOl = document.createElement('ol');
     johtoOl.setAttribute('class', 'hidden johto-list');
     johtoOl.setAttribute('start', '152');
@@ -172,6 +175,7 @@ function pokemonTypeImageId(id) {
   var xhrTypeImageId = new XMLHttpRequest();
   xhrTypeImageId.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhrTypeImageId.responseType = 'json';
+  xhrTypeImageId.addEventListener('loadstart', loadingGif);
   xhrTypeImageId.addEventListener('load', function () {
     pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default;
     pokemonObject.number = xhrTypeImageId.response.id;
@@ -220,6 +224,7 @@ function pokemonFlavorText(id) {
   xhrFlavorText.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
   xhrFlavorText.responseType = 'json';
   xhrFlavorText.addEventListener('load', function () {
+    loadingGif();
     for (var ftIndex = (xhrFlavorText.response.flavor_text_entries.length - 1); ftIndex >= 0; ftIndex--) {
       if (xhrFlavorText.response.flavor_text_entries[ftIndex].language.name === 'en') {
         pokemonObject.flavorText = xhrFlavorText.response.flavor_text_entries[ftIndex].flavor_text;
@@ -328,3 +333,11 @@ $searchBar.addEventListener('input', function (event) {
   var $searchList = document.querySelector('.search-list');
   $searchList.addEventListener('click', pokemonPage);
 });
+
+function loadingGif() {
+  if ($loading.className === 'hidden loading') {
+    $loading.className = 'loading';
+  } else {
+    $loading.className = 'hidden loading';
+  }
+}
