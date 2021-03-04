@@ -98,7 +98,7 @@ function kantoDex() {
   var xhrKanto = new XMLHttpRequest();
   xhrKanto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrKanto.responseType = 'json';
-  xhrKanto.addEventListener('loadstart', loadingGif);
+  loadingGif();
   xhrKanto.addEventListener('load', function () {
     kantoOl = document.createElement('ol');
     kantoOl.setAttribute('class', 'kanto-list');
@@ -121,7 +121,6 @@ function johtoDex() {
   xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrJohto.responseType = 'json';
   xhrJohto.addEventListener('load', function () {
-    loadingGif();
     johtoOl = document.createElement('ol');
     johtoOl.setAttribute('class', 'hidden johto-list');
     johtoOl.setAttribute('start', '152');
@@ -134,6 +133,7 @@ function johtoDex() {
       johtoOl.appendChild(johtoLi);
     }
     $listContainer.appendChild(johtoOl);
+    loadingGif();
   });
   xhrJohto.send();
 }
@@ -172,10 +172,10 @@ function pokemonPage(target) {
 }
 
 function pokemonTypeImageId(id) {
+  loadingGif();
   var xhrTypeImageId = new XMLHttpRequest();
   xhrTypeImageId.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhrTypeImageId.responseType = 'json';
-  xhrTypeImageId.addEventListener('loadstart', loadingGif);
   xhrTypeImageId.addEventListener('load', function () {
     pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default;
     pokemonObject.number = xhrTypeImageId.response.id;
@@ -224,7 +224,6 @@ function pokemonFlavorText(id) {
   xhrFlavorText.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/' + id);
   xhrFlavorText.responseType = 'json';
   xhrFlavorText.addEventListener('load', function () {
-    loadingGif();
     for (var ftIndex = (xhrFlavorText.response.flavor_text_entries.length - 1); ftIndex >= 0; ftIndex--) {
       if (xhrFlavorText.response.flavor_text_entries[ftIndex].language.name === 'en') {
         pokemonObject.flavorText = xhrFlavorText.response.flavor_text_entries[ftIndex].flavor_text;
@@ -274,6 +273,7 @@ function pokemonFlavorText(id) {
       });
     }
   });
+  loadingGif();
   xhrFlavorText.send();
 }
 
