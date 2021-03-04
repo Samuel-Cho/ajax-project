@@ -113,6 +113,8 @@ body {
 .search-list-container {
   overflow-y: scroll;
   max-height: 513px;
+
+  /* max-height: 77%; */
 }
 
 .search-list {
@@ -126,6 +128,10 @@ li,
 input,
 .pokemon-name {
   font-size: 25px;
+}
+
+li {
+  margin-bottom: 5px;
 }
 
 input {
@@ -293,9 +299,9 @@ ol {
     max-height: 100%;
   }
 
-  /* .search-list {
-    padding-bottom: 120px;
-  } */
+  .search-list-container {
+    max-height: 77%;
+  }
 }
 
 @media screen and (min-width: 812px) and (orientation: landscape) {
