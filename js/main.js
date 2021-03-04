@@ -138,7 +138,7 @@ function johtoDex() {
 $listContainer.addEventListener('click', pokemonPage);
 
 function pokemonPage(target) {
-  if (event.target.matches('li') || event.target.matches('img')) {
+  if (event.target.matches('li') || event.target.className === 'caught-pokemon-img') {
     var selectedPokemon = event.target.closest('.pokemon-entry');
     pokemonObject = {
       pokemon_name: null,
@@ -178,15 +178,20 @@ function pokemonTypeImageId(id) {
     for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImageId.response.types.length; typeIndexAPI++) {
       pokemonObject.types.push(xhrTypeImageId.response.types[typeIndexAPI].type.name);
     }
+
+    var divColumnLeft = document.createElement('div');
+    divColumnLeft.setAttribute('class', 'column-left');
+    divPokemonPage.appendChild(divColumnLeft);
+
     var imgPokemon = document.createElement('img');
     imgPokemon.setAttribute('class', 'pokemon-img');
     imgPokemon.setAttribute('src', pokemonObject.image);
     imgPokemon.setAttribute('alt', 'Pokemon Image');
-    divPokemonPage.appendChild(imgPokemon);
+    divColumnLeft.appendChild(imgPokemon);
 
     var divPokemonNTContainer = document.createElement('div');
     divPokemonNTContainer.setAttribute('class', 'pokemon-nt-container');
-    divPokemonPage.appendChild(divPokemonNTContainer);
+    divColumnLeft.appendChild(divPokemonNTContainer);
 
     var pPokemonName = document.createElement('p');
     pPokemonName.setAttribute('class', 'pokemon-name');
@@ -221,11 +226,16 @@ function pokemonFlavorText(id) {
         break;
       }
     }
+
+    var divColumnRight = document.createElement('div');
+    divColumnRight.setAttribute('class', 'column-right');
+    divPokemonPage.appendChild(divColumnRight);
+
     var pPokemonFT = document.createElement('p');
     pPokemonFT.setAttribute('class', 'pokemon-flavor-text');
     var tnPokemonFT = document.createTextNode(pokemonObject.flavorText);
     pPokemonFT.appendChild(tnPokemonFT);
-    divPokemonPage.appendChild(pPokemonFT);
+    divColumnRight.appendChild(pPokemonFT);
 
     var buttonCatch = document.createElement('button');
     buttonCatch.setAttribute('class', 'catch not-caught');
@@ -237,7 +247,7 @@ function pokemonFlavorText(id) {
         buttonCatch.setAttribute('class', 'catch not-caught');
       }
     }
-    divPokemonPage.appendChild(buttonCatch);
+    divColumnRight.appendChild(buttonCatch);
 
     buttonCatch.addEventListener('click', catchPokemon);
 
