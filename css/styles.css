@@ -95,9 +95,6 @@ body {
   position: absolute;
   padding: 15px;
   overflow-y: auto;
-
-  /* width: 323px;
-  height: 515px; */
 }
 
 .search-container {
@@ -113,8 +110,6 @@ body {
 .search-list-container {
   overflow-y: scroll;
   max-height: 513px;
-
-  /* max-height: 77%; */
 }
 
 .search-list {
@@ -159,8 +154,6 @@ ol {
 
 .pokemon-img {
   width: 201px;
-
-  /* margin-top: 15px; */
 }
 
 .pokemon-nt-container {
