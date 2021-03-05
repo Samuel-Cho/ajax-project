@@ -40,6 +40,22 @@ body {
   outline: none;
 }
 
+.homepage-text-container {
+  height: 45vh;
+  width: 73%;
+  position: relative;
+  margin: auto;
+}
+
+.homepage-text {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .modal-background {
   height: 100vh;
   width: 100%;
@@ -340,7 +356,7 @@ ol {
   }
 }
 
-@media screen and (min-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 1000px) and (orientation: landscape) {
   .modal-background {
     padding: 25px;
     justify-content: space-around;
@@ -358,11 +374,9 @@ ol {
     font-size: 40px;
   }
 
-  .pokemon-types {
-    font-size: 1.5rem;
-  }
-
-  .region-text {
+  .pokemon-types,
+  .region-text,
+  .homepage-text {
     font-size: 1.5rem;
   }
 

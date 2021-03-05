@@ -1,6 +1,7 @@
 var $pressHereButton = document.querySelector('.press-here');
 var $modal = document.querySelector('.modal-background');
 var $appName = document.querySelector('.app-name');
+var $homepageText = document.querySelector('.homepage-text-container');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
@@ -27,6 +28,7 @@ $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
   $pressHereButton.textContent = '';
   $appName.className = 'hidden app-name';
+  $homepageText.className = 'hidden homepage-text-container';
 });
 
 $buttonContainer.addEventListener('click', function (event) {
