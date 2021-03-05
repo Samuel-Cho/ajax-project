@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'DotGothic16', sans-serif;
 }
 
 .pokeball-top {
@@ -34,6 +34,7 @@ body {
   border-radius: 50%;
   border: 20px solid black;
   background-color: white;
+  font-family: 'DotGothic16', sans-serif;
 }
 
 .press-here:focus {
