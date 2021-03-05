@@ -71,7 +71,7 @@ $buttonContainer.addEventListener('click', function (event) {
   }
 });
 
-function createList(pokemonEntry) {
+function createListItem(pokemonEntry) {
   var liPokemon = document.createElement('li');
   liPokemon.setAttribute('class', 'pokemon-entry');
   liPokemon.setAttribute('id', pokemonEntry.toLowerCase());
@@ -105,7 +105,7 @@ function kantoDex() {
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       nationalList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
-      var kantoLi = createList(kantoList[kantoIndex]);
+      var kantoLi = createListItem(kantoList[kantoIndex]);
       kantoOl.appendChild(kantoLi);
     }
     $listContainer.appendChild(kantoOl);
@@ -129,7 +129,7 @@ function johtoDex() {
       nationalList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
     }
     for (var j = 0; j < johtoList.length; j++) {
-      var johtoLi = createList(johtoList[j]);
+      var johtoLi = createListItem(johtoList[j]);
       johtoOl.appendChild(johtoLi);
     }
     $listContainer.appendChild(johtoOl);
@@ -292,7 +292,7 @@ function caughtDex(data) {
   caughtOl.setAttribute('class', 'caught-list');
   for (var caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
     var caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
-    var caughtPokemonLi = createList(caughtPokemonName);
+    var caughtPokemonLi = createListItem(caughtPokemonName);
     caughtPokemonLi.setAttribute('value', data.caughtList[caughtIndex].number);
     var divCaughtImg = document.createElement('div');
     divCaughtImg.setAttribute('class', 'caught-img-container');
@@ -320,7 +320,7 @@ $searchBar.addEventListener('input', function (event) {
   for (var g = 0; g < nationalList.length; g++) {
     var lowerSearch = nationalList[g].toLowerCase();
     if (lowerSearch.includes($searchBar.value.toLowerCase())) {
-      var searchLi = createList(nationalList[g]);
+      var searchLi = createListItem(nationalList[g]);
       ulSearch.appendChild(searchLi);
     }
   }
