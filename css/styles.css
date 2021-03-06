@@ -198,8 +198,6 @@ ol {
   width: 245px;
   height: 84px;
   overflow-y: auto;
-
-  /* border: 5px ridge; */
   padding: 5px;
   margin-top: 0;
 }
@@ -333,11 +331,6 @@ ol {
   .column-right {
     height: 100%;
     width: 50%;
-
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center; */
   }
 
   .pokemon-flavor-text {
@@ -386,8 +379,6 @@ ol {
   .caught-list {
     display: flex;
     flex-wrap: wrap;
-
-    /* justify-content: center; */
   }
 
   ol.caught-list li {
@@ -492,8 +483,6 @@ ol {
   .pokemon-flavor-text {
     width: 400px;
     height: 140px;
-
-    /* border: 10px ridge; */
     font-size: 1.5rem;
   }
 
