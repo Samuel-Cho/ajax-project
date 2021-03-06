@@ -353,6 +353,15 @@ ol {
   .search-list-container {
     max-height: 77%;
   }
+
+  .caught-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ol.caught-list li {
+    width: 50%;
+  }
 }
 
 @media screen and (min-width: 667px) and (orientation: landscape) {
@@ -372,6 +381,17 @@ ol {
 
   .pokemon-types {
     font-size: 1.2rem;
+  }
+
+  .caught-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    /* justify-content: center; */
+  }
+
+  ol.caught-list li {
+    width: calc(100% / 3);
   }
 }
 
@@ -481,5 +501,14 @@ ol {
     top: 20%;
     left: 7%;
     max-height: 75%;
+  }
+
+  .caught-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ol.caught-list li {
+    width: 50%;
   }
 }
