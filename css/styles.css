@@ -163,13 +163,23 @@ ol {
 }
 
 .pokemon-page {
-  text-align: center;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.column-left {
+  text-align: center;
+}
+
+.column-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .pokemon-img {
@@ -188,8 +198,10 @@ ol {
   width: 245px;
   height: 84px;
   overflow-y: auto;
-  border: 5px ridge;
+
+  /* border: 5px ridge; */
   padding: 5px;
+  margin-top: 0;
 }
 
 .not-caught,
@@ -198,7 +210,7 @@ ol {
 }
 
 .not-caught {
-  background: radial-gradient(50% 50% at 50% 50%, #fff 84.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
+  background: radial-gradient(50% 50% at 50% 50%, #fff 64.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
 }
 
 .caught {
@@ -297,7 +309,7 @@ ol {
   .region-text {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 
   .list-container {
@@ -321,15 +333,16 @@ ol {
   .column-right {
     height: 100%;
     width: 50%;
-    display: flex;
+
+    /* display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
   }
 
   .pokemon-flavor-text {
     height: 55%;
-    width: 80%;
+    width: 100%;
   }
 
   .search-container {
@@ -339,6 +352,12 @@ ol {
 
   .search-list-container {
     max-height: 77%;
+  }
+}
+
+@media screen and (min-width: 667px) and (orientation: landscape) {
+  .region-text {
+    font-size: 1rem;
   }
 }
 
@@ -401,6 +420,12 @@ ol {
   }
 }
 
+@media screen and (width: 375px) and (orientation: portrait) {
+  .pokemon-flavor-text {
+    height: 120px;
+  }
+}
+
 @media screen and (min-width: 768px) and (orientation: portrait) {
   .list-container {
     top: 50%;
@@ -445,9 +470,10 @@ ol {
   }
 
   .pokemon-flavor-text {
-    width: 320px;
+    width: 400px;
     height: 140px;
-    border: 10px ridge;
+
+    /* border: 10px ridge; */
     font-size: 1.5rem;
   }
 
