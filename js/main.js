@@ -179,7 +179,7 @@ function pokemonTypeImageId(id) {
   xhrTypeImageId.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhrTypeImageId.responseType = 'json';
   xhrTypeImageId.addEventListener('load', function () {
-    pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default + 'adfad';
+    pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default;
     pokemonObject.number = xhrTypeImageId.response.id;
     for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImageId.response.types.length; typeIndexAPI++) {
       pokemonObject.types.push(xhrTypeImageId.response.types[typeIndexAPI].type.name);
@@ -201,7 +201,6 @@ function pokemonTypeImageId(id) {
     imgPokemon.addEventListener('error', event => {
       imgPokemon.setAttribute('src', errorImageUrl);
     });
-    // divColumnLeft.appendChild(imgPokemon);
 
     var divPokemonNTContainer = document.createElement('div');
     divPokemonNTContainer.setAttribute('class', 'pokemon-nt-container');
@@ -302,14 +301,14 @@ function caughtDex(data) {
   caughtOl.setAttribute('class', 'caught-list');
   $listContainer.appendChild(caughtOl);
   for (let caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
-    var caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
-    var caughtPokemonLi = createListItem(caughtPokemonName);
+    const caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
+    const caughtPokemonLi = createListItem(caughtPokemonName);
     caughtPokemonLi.setAttribute('value', data.caughtList[caughtIndex].number);
-    var divCaughtImg = document.createElement('div');
+    const divCaughtImg = document.createElement('div');
     divCaughtImg.setAttribute('class', 'caught-img-container');
     caughtPokemonLi.appendChild(divCaughtImg);
-    var errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
-    var caughtPokemonImage = document.createElement('img');
+    const errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
+    const caughtPokemonImage = document.createElement('img');
     caughtPokemonImage.setAttribute('class', 'caught-pokemon-img');
     caughtPokemonImage.setAttribute('src', data.caughtList[caughtIndex].image);
     caughtPokemonImage.setAttribute('alt', capitalize(data.caughtList[caughtIndex].pokemon_name) + ' Image');
