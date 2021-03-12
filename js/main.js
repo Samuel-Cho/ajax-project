@@ -32,7 +32,7 @@ $pressHereButton.addEventListener('click', function (event) {
 });
 
 $buttonContainer.addEventListener('click', function (event) {
-  if (event.target.matches('button') || event.target.matches('p')) {
+  if (event.target.matches('img') || event.target.matches('p')) {
     var closestRegion = event.target.closest('.region');
     for (var regionIndex = 0; regionIndex < $region.length; regionIndex++) {
       $region[regionIndex].className = 'region';
