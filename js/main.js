@@ -7,12 +7,12 @@ var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
 var $searchListContainer = document.querySelector('.search-list-container');
+var $kantoOl = document.querySelector('.kanto-list');
+var $johtoOl = document.querySelector('.johto-list');
 var ulSearch = null;
 var nationalList = [];
 var kantoList = [];
 var johtoList = [];
-var kantoOl = null;
-var johtoOl = null;
 var caughtOl = null;
 var pokemonObject = {
   pokemon_name: null,
@@ -42,8 +42,8 @@ $buttonContainer.addEventListener('click', function (event) {
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
     if (closestRegion.id === 'kanto') {
-      kantoOl.className = 'kanto-list';
-      johtoOl.className = 'hidden johto-list';
+      $kantoOl.className = 'kanto-list';
+      $johtoOl.className = 'hidden johto-list';
       if (caughtOl !== null) {
         caughtOl.className = 'hidden caught-list';
       }
@@ -51,8 +51,8 @@ $buttonContainer.addEventListener('click', function (event) {
         $pokemonPageHidden.remove();
       }
     } else if (closestRegion.id === 'johto') {
-      kantoOl.className = 'hidden kanto-list';
-      johtoOl.className = 'johto-list';
+      $kantoOl.className = 'hidden kanto-list';
+      $johtoOl.className = 'johto-list';
       if (caughtOl !== null) {
         caughtOl.className = 'hidden caught-list';
       }
@@ -60,8 +60,8 @@ $buttonContainer.addEventListener('click', function (event) {
         $pokemonPageHidden.remove();
       }
     } else if (closestRegion.id === 'caught') {
-      kantoOl.className = 'hidden kanto-list';
-      johtoOl.className = 'hidden johto-list';
+      $kantoOl.className = 'hidden kanto-list';
+      $johtoOl.className = 'hidden johto-list';
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
@@ -102,15 +102,12 @@ function kantoDex() {
   xhrKanto.responseType = 'json';
   loadingGif();
   xhrKanto.addEventListener('load', function () {
-    kantoOl = document.createElement('ol');
-    kantoOl.setAttribute('class', 'kanto-list');
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       nationalList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       var kantoLi = createListItem(kantoList[kantoIndex]);
-      kantoOl.appendChild(kantoLi);
+      $kantoOl.appendChild(kantoLi);
     }
-    $listContainer.appendChild(kantoOl);
     johtoDex();
   });
   xhrKanto.send();
@@ -123,18 +120,14 @@ function johtoDex() {
   xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrJohto.responseType = 'json';
   xhrJohto.addEventListener('load', function () {
-    johtoOl = document.createElement('ol');
-    johtoOl.setAttribute('class', 'hidden johto-list');
-    johtoOl.setAttribute('start', '152');
     for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
       johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
       nationalList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
     }
     for (var j = 0; j < johtoList.length; j++) {
       var johtoLi = createListItem(johtoList[j]);
-      johtoOl.appendChild(johtoLi);
+      $johtoOl.appendChild(johtoLi);
     }
-    $listContainer.appendChild(johtoOl);
     loadingGif();
   });
   xhrJohto.send();
@@ -154,8 +147,8 @@ function pokemonPage(target) {
     for (var x = 0; x < $region.length; x++) {
       $region[x].className = 'region';
     }
-    kantoOl.className = 'hidden kanto-list';
-    johtoOl.className = 'hidden johto-list';
+    $kantoOl.className = 'hidden kanto-list';
+    $johtoOl.className = 'hidden johto-list';
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
     if (caughtOl !== null) {
