@@ -179,7 +179,7 @@ function pokemonTypeImageId(id) {
   xhrTypeImageId.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + id);
   xhrTypeImageId.responseType = 'json';
   xhrTypeImageId.addEventListener('load', function () {
-    pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default;
+    pokemonObject.image = xhrTypeImageId.response.sprites.other['official-artwork'].front_default + 'adfad';
     pokemonObject.number = xhrTypeImageId.response.id;
     for (var typeIndexAPI = 0; typeIndexAPI < xhrTypeImageId.response.types.length; typeIndexAPI++) {
       pokemonObject.types.push(xhrTypeImageId.response.types[typeIndexAPI].type.name);
@@ -189,11 +189,19 @@ function pokemonTypeImageId(id) {
     divColumnLeft.setAttribute('class', 'column-left');
     divPokemonPage.appendChild(divColumnLeft);
 
+    var errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
+
     var imgPokemon = document.createElement('img');
     imgPokemon.setAttribute('class', 'pokemon-img');
     imgPokemon.setAttribute('src', pokemonObject.image);
-    imgPokemon.setAttribute('alt', 'Pokemon Image');
-    divColumnLeft.appendChild(imgPokemon);
+    imgPokemon.setAttribute('alt', capitalize(pokemonObject.pokemon_name) + ' Image');
+    imgPokemon.addEventListener('load', event => {
+      divColumnLeft.prepend(imgPokemon);
+    });
+    imgPokemon.addEventListener('error', event => {
+      imgPokemon.setAttribute('src', errorImageUrl);
+    });
+    // divColumnLeft.appendChild(imgPokemon);
 
     var divPokemonNTContainer = document.createElement('div');
     divPokemonNTContainer.setAttribute('class', 'pokemon-nt-container');
@@ -274,8 +282,8 @@ function pokemonFlavorText(id) {
         return a.number - b.number;
       });
     }
+    loadingGif();
   });
-  loadingGif();
   xhrFlavorText.send();
 }
 
@@ -292,21 +300,28 @@ function caughtDex(data) {
   }
   caughtOl = document.createElement('ol');
   caughtOl.setAttribute('class', 'caught-list');
-  for (var caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
+  $listContainer.appendChild(caughtOl);
+  for (let caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
     var caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
     var caughtPokemonLi = createListItem(caughtPokemonName);
     caughtPokemonLi.setAttribute('value', data.caughtList[caughtIndex].number);
     var divCaughtImg = document.createElement('div');
     divCaughtImg.setAttribute('class', 'caught-img-container');
     caughtPokemonLi.appendChild(divCaughtImg);
+    var errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
     var caughtPokemonImage = document.createElement('img');
     caughtPokemonImage.setAttribute('class', 'caught-pokemon-img');
     caughtPokemonImage.setAttribute('src', data.caughtList[caughtIndex].image);
-    caughtPokemonImage.setAttribute('alt', 'Pokemon Image');
-    divCaughtImg.appendChild(caughtPokemonImage);
+    caughtPokemonImage.setAttribute('alt', capitalize(data.caughtList[caughtIndex].pokemon_name) + ' Image');
+    caughtPokemonImage.addEventListener('load', event => {
+      divCaughtImg.appendChild(caughtPokemonImage);
+    });
+    caughtPokemonImage.addEventListener('error', event => {
+      caughtPokemonImage.setAttribute('src', errorImageUrl);
+    });
+    // divCaughtImg.appendChild(caughtPokemonImage);
     caughtOl.appendChild(caughtPokemonLi);
   }
-  $listContainer.appendChild(caughtOl);
 }
 
 function createSearchList() {
