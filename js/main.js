@@ -9,11 +9,11 @@ var $searchContainer = document.querySelector('.search-container');
 var $searchListContainer = document.querySelector('.search-list-container');
 var $kantoOl = document.querySelector('[data-region="kanto"]');
 var $johtoOl = document.querySelector('[data-region="johto"]');
+var $caughtOl = document.querySelector('[data-region="caught"]');
 var ulSearch = null;
 var nationalList = [];
 var kantoList = [];
 var johtoList = [];
-var caughtOl = null;
 var pokemonObject = {
   pokemon_name: null,
   image: null,
@@ -43,9 +43,7 @@ $buttonContainer.addEventListener('click', function (event) {
     $searchContainer.className = 'hidden search-container';
     var $regionList = document.querySelectorAll('.region-list');
     if (closestRegion.id !== 'search') {
-      if (caughtOl !== null) {
-        caughtOl.className = 'hidden caught-list';
-      }
+      $caughtOl.className = 'hidden caught-list';
       for (var b = 0; b < $regionList.length; b++) {
         if (closestRegion.id === $regionList[b].getAttribute('data-region')) {
           $regionList[b].className = 'region-list';
@@ -144,9 +142,7 @@ function pokemonPage(target) {
     $johtoOl.className = 'hidden region-list';
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
-    if (caughtOl !== null) {
-      caughtOl.className = 'hidden region-list';
-    }
+    $caughtOl.className = 'hidden region-list';
     pokemonObject.pokemon_name = selectedPokemon.id;
     divPokemonPage = createPokemonPage(pokemonObject);
     pokemonTypeImageId(selectedPokemon.id);
@@ -279,15 +275,9 @@ function createPokemonPage(pokemonObject) {
 }
 
 function caughtDex(data) {
-  var $caughtListHidden = document.querySelector('[data-region="caught"]');
-  if ($caughtListHidden !== null) {
-    $caughtListHidden.remove();
+  while ($caughtOl.firstChild) {
+    $caughtOl.removeChild($caughtOl.lastChild);
   }
-  caughtOl = document.createElement('ol');
-  caughtOl.setAttribute('class', 'region-list');
-  // caughtOl.setAttribute('id', 'caught');
-  caughtOl.setAttribute('data-region', 'caught');
-  $listContainer.appendChild(caughtOl);
   for (let caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
     const caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
     const caughtPokemonLi = createListItem(caughtPokemonName);
@@ -306,8 +296,7 @@ function caughtDex(data) {
     caughtPokemonImage.addEventListener('error', event => {
       caughtPokemonImage.setAttribute('src', errorImageUrl);
     });
-    // divCaughtImg.appendChild(caughtPokemonImage);
-    caughtOl.appendChild(caughtPokemonLi);
+    $caughtOl.appendChild(caughtPokemonLi);
   }
 }
 
