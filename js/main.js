@@ -7,8 +7,8 @@ var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
 var $searchListContainer = document.querySelector('.search-list-container');
-var $kantoOl = document.querySelector('.kanto-list');
-var $johtoOl = document.querySelector('.johto-list');
+var $kantoOl = document.querySelector('[data-region="kanto"]');
+var $johtoOl = document.querySelector('[data-region="johto"]');
 var ulSearch = null;
 var nationalList = [];
 var kantoList = [];
@@ -41,31 +41,24 @@ $buttonContainer.addEventListener('click', function (event) {
     var $pokemonPageHidden = document.querySelector('.pokemon-page');
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
-    if (closestRegion.id === 'kanto') {
-      $kantoOl.className = 'kanto-list';
-      $johtoOl.className = 'hidden johto-list';
+    var $regionList = document.querySelectorAll('.region-list');
+    if (closestRegion.id !== 'search') {
       if (caughtOl !== null) {
         caughtOl.className = 'hidden caught-list';
       }
-      if ($pokemonPageHidden !== null) {
-        $pokemonPageHidden.remove();
-      }
-    } else if (closestRegion.id === 'johto') {
-      $kantoOl.className = 'hidden kanto-list';
-      $johtoOl.className = 'johto-list';
-      if (caughtOl !== null) {
-        caughtOl.className = 'hidden caught-list';
+      for (var b = 0; b < $regionList.length; b++) {
+        if (closestRegion.id === $regionList[b].getAttribute('data-region')) {
+          $regionList[b].className = 'region-list';
+        } else {
+          $regionList[b].className = 'hidden region-list';
+        }
       }
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
-    } else if (closestRegion.id === 'caught') {
-      $kantoOl.className = 'hidden kanto-list';
-      $johtoOl.className = 'hidden johto-list';
-      if ($pokemonPageHidden !== null) {
-        $pokemonPageHidden.remove();
+      if (closestRegion.id === 'caught') {
+        caughtDex(data);
       }
-      caughtDex(data);
     } else {
       $listContainer.className = 'hidden list-container';
       $searchContainer.className = 'search-container';
@@ -147,12 +140,12 @@ function pokemonPage(target) {
     for (var x = 0; x < $region.length; x++) {
       $region[x].className = 'region';
     }
-    $kantoOl.className = 'hidden kanto-list';
-    $johtoOl.className = 'hidden johto-list';
+    $kantoOl.className = 'hidden region-list';
+    $johtoOl.className = 'hidden region-list';
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
     if (caughtOl !== null) {
-      caughtOl.className = 'hidden caught-list';
+      caughtOl.className = 'hidden region-list';
     }
     pokemonObject.pokemon_name = selectedPokemon.id;
     divPokemonPage = createPokemonPage(pokemonObject);
@@ -286,12 +279,14 @@ function createPokemonPage(pokemonObject) {
 }
 
 function caughtDex(data) {
-  var $caughtListHidden = document.querySelector('.caught-list');
+  var $caughtListHidden = document.querySelector('[data-region="caught"]');
   if ($caughtListHidden !== null) {
     $caughtListHidden.remove();
   }
   caughtOl = document.createElement('ol');
-  caughtOl.setAttribute('class', 'caught-list');
+  caughtOl.setAttribute('class', 'region-list');
+  // caughtOl.setAttribute('id', 'caught');
+  caughtOl.setAttribute('data-region', 'caught');
   $listContainer.appendChild(caughtOl);
   for (let caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
     const caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
