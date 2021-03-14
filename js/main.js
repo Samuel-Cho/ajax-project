@@ -232,14 +232,18 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divColumnRight.appendChild(pPokemonFT);
 
-    var buttonCatch = document.createElement('button');
-    buttonCatch.setAttribute('class', 'catch not-caught');
+    // var buttonCatch = document.createElement('button');
+    var buttonCatch = document.createElement('img');
+    // buttonCatch.setAttribute('src', 'https://listimg.pinclipart.com/picdir/s/558-5584065_transparent-pokeball-clipart-pokeball-black-and-white-png.png');
+    // buttonCatch.setAttribute('class', 'catch not-caught');
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
         buttonCatch.setAttribute('class', 'catch caught');
+        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
         break;
       } else {
         buttonCatch.setAttribute('class', 'catch not-caught');
+        buttonCatch.setAttribute('src', 'https://listimg.pinclipart.com/picdir/s/558-5584065_transparent-pokeball-clipart-pokeball-black-and-white-png.png');
       }
     }
     divColumnRight.appendChild(buttonCatch);
@@ -249,9 +253,12 @@ function pokemonFlavorText(id) {
     function catchPokemon(event) {
       if (buttonCatch.className === 'catch not-caught') {
         buttonCatch.className = 'catch caught';
+        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
+
         data.caughtList.push(pokemonObject);
       } else {
         buttonCatch.className = 'catch not-caught';
+        buttonCatch.setAttribute('src', 'https://listimg.pinclipart.com/picdir/s/558-5584065_transparent-pokeball-clipart-pokeball-black-and-white-png.png');
         for (var a = 0; a < data.caughtList.length; a++) {
           if (data.caughtList[a].pokemon_name === id) {
             data.caughtList.splice(a, 1);

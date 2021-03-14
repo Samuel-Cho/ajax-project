@@ -206,16 +206,17 @@ ol {
 .not-caught,
 .caught {
   margin-top: 8px;
-  border-radius: 50%;
+
+  /* border-radius: 50%; */
 }
 
-.not-caught {
+/* .not-caught {
   background: radial-gradient(50% 50% at 50% 50%, #fff 64.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
-}
+} */
 
-.caught {
+/* .caught {
   background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%), #ff3030;
-}
+} */
 
 .region-button:focus,
 .not-caught:focus,
