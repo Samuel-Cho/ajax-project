@@ -13,7 +13,7 @@ A dynamic HTML, CSS, and JavaScript application for Pokémon trainers to learn a
 
 ## Live Demo
 
-Try the application here: https://samuel-cho.github.io/ajax-project/
+Try the application here: https://samuel-cho.github.io/pokelogue/
 
 ## Features
 
