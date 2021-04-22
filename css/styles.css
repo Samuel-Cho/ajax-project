@@ -350,12 +350,12 @@ ol {
     max-height: 77%;
   }
 
-  .caught-list {
+  [data-region="caught"] {
     display: flex;
     flex-wrap: wrap;
   }
 
-  ol.caught-list li {
+  [data-region="caught"] li {
     width: 50%;
   }
 }
@@ -379,12 +379,12 @@ ol {
     font-size: 1.2rem;
   }
 
-  .caught-list {
+  [data-region="caught"] {
     display: flex;
     flex-wrap: wrap;
   }
 
-  ol.caught-list li {
+  [data-region="caught"] li {
     width: calc(100% / 3);
   }
 }
@@ -495,12 +495,12 @@ ol {
     max-height: 75%;
   }
 
-  .caught-list {
+  [data-region="caught"] {
     display: flex;
     flex-wrap: wrap;
   }
 
-  ol.caught-list li {
+  [data-region="caught"] li {
     width: 50%;
   }
 }
