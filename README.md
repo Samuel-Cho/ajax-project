@@ -28,4 +28,6 @@ Try the application here: https://samuel-cho.github.io/pokelogue/
 
 ## Preview
 
-<img width="378" alt="Screen Shot 2021-03-04 at 3 15 31 PM" src="https://user-images.githubusercontent.com/76749207/110043757-d27de180-7cfc-11eb-9869-64335818f86e.png"> <img width="378" alt="Screen Shot 2021-03-04 at 3 15 45 PM" src="https://user-images.githubusercontent.com/76749207/110043761-d3af0e80-7cfc-11eb-806d-9f65d5c9133f.png"> <img width="370" alt="Screen Shot 2021-03-04 at 3 15 54 PM" src="https://user-images.githubusercontent.com/76749207/110043762-d447a500-7cfc-11eb-8ba5-74a8f6cf34b7.png"> <img width="368" alt="Screen Shot 2021-03-04 at 3 16 10 PM" src="https://user-images.githubusercontent.com/76749207/110043764-d4e03b80-7cfc-11eb-9fcc-71b8c8aaf0cf.png">
+<img width="210" alt="Screen Shot 2021-04-22 at 10 48 19 AM" src="https://user-images.githubusercontent.com/76749207/115763685-927cc780-a359-11eb-9b00-ffdf2b1841ee.png"> <img width="210" alt="Screen Shot 2021-04-22 at 10 48 56 AM" src="https://user-images.githubusercontent.com/76749207/115763696-94df2180-a359-11eb-916b-29fb3833e324.png"> <img width="210" alt="Screen Shot 2021-04-22 at 10 49 11 AM" src="https://user-images.githubusercontent.com/76749207/115763705-97417b80-a359-11eb-962e-48847273cc26.png"> <img width="210" alt="Screen Shot 2021-04-22 at 10 49 31 AM" src="https://user-images.githubusercontent.com/76749207/115763713-990b3f00-a359-11eb-8ce0-6018cfd1515b.png">
+
+
