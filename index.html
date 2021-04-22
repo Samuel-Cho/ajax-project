@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -20,28 +21,34 @@
       <div class="pokeball-button">
         <button class="press-here">Press Here!</button>
       </div>
+      <div class="homepage-text-container">
+        <p class="homepage-text">Learn about and record the Pokémon you have caught!</p>
+      </div>
     </div>
     <div class="hidden modal-background">
       <div class="button-container">
         <div class="region" id="search">
-          <button class="region-button search-button"></button>
+          <img src="https://cdn.bulbagarden.net/upload/a/a1/SugimoriPremierBall.png" class="region-button search-button">
           <p class="region-text">Search</p>
         </div>
         <div class="select region" id="kanto">
-          <button class="region-button kanto-button"></button>
+          <img src= "https://cdn.bulbagarden.net/upload/a/a6/SugimoriPokeBall.png" class="region-button kanto-button">
           <p class="region-text">Kanto</p>
         </div>
         <div class="region" id="johto">
-          <button class="region-button johto-button"></button>
+          <img src="https://cdn.bulbagarden.net/upload/0/06/SugimoriGreatBall.png" class="region-button johto-button">
           <p class="region-text">Johto</p>
         </div>
         <div class="region" id="caught">
-          <button class="region-button caught-button"></button>
+          <img src="https://cdn.bulbagarden.net/upload/2/2d/SugimoriCherishBall.png" class="region-button caught-button">
           <p class="region-text">Caught</p>
         </div>
       </div>
       <div class="list-container">
         <img class="hidden loading" src="https://i.gifer.com/9xnj.gif" alt="spinning gif">
+        <ol data-region="kanto" class="region-list"></ol>
+        <ol data-region="johto" class="hidden region-list" start="152"></ol>
+        <ol data-region="caught" class="hidden region-list"></ol>
 
       </div>
       <div class="hidden search-container">

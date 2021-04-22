@@ -1,5 +1,6 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'DotGothic16', sans-serif;
+  color: rgb(61, 61, 61);
 }
 
 .pokeball-top {
@@ -18,6 +19,7 @@ body {
 
 .app-name {
   text-align: center;
+  color: rgb(36, 36, 36);
 }
 
 .pokeball-button {
@@ -34,10 +36,28 @@ body {
   border-radius: 50%;
   border: 20px solid black;
   background-color: white;
+  font-family: 'DotGothic16', sans-serif;
+  color: rgb(61, 61, 61);
 }
 
 .press-here:focus {
   outline: none;
+}
+
+.homepage-text-container {
+  height: 45vh;
+  width: 73%;
+  position: relative;
+  margin: auto;
+}
+
+.homepage-text {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal-background {
@@ -64,24 +84,7 @@ body {
 .caught {
   height: 47px;
   width: 47px;
-  border-radius: 50%;
   border: none;
-}
-
-.search-button {
-  background: linear-gradient(180deg, #8f00ff 40.1%, rgba(0, 0, 0, 0) 60%), #fff;
-}
-
-.kanto-button {
-  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
-}
-
-.johto-button {
-  background: linear-gradient(180deg, #ffd700 40.63%, rgba(255, 255, 255, 0) 60%), #c0c0c0;
-}
-
-.caught-button {
-  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
 }
 
 .select {
@@ -143,7 +146,6 @@ ol {
 }
 
 .pokemon-page {
-  text-align: center;
   height: 100%;
   width: 100%;
   display: flex;
@@ -152,12 +154,19 @@ ol {
   justify-content: space-evenly;
 }
 
-.pokemon-img {
-  width: 201px;
+.column-left {
+  text-align: center;
 }
 
-.pokemon-nt-container {
-  margin-top: 15px;
+.column-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pokemon-img {
+  width: 201px;
 }
 
 .pokemon-types {
@@ -172,21 +181,13 @@ ol {
   width: 245px;
   height: 84px;
   overflow-y: auto;
-  border: 5px ridge;
   padding: 5px;
+  margin-top: 0;
 }
 
 .not-caught,
 .caught {
   margin-top: 8px;
-}
-
-.not-caught {
-  background: radial-gradient(50% 50% at 50% 50%, #fff 84.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
-}
-
-.caught {
-  background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%), #ff3030;
 }
 
 .region-button:focus,
@@ -281,7 +282,7 @@ ol {
   .region-text {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 
   .list-container {
@@ -305,15 +306,11 @@ ol {
   .column-right {
     height: 100%;
     width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
   }
 
   .pokemon-flavor-text {
     height: 55%;
-    width: 80%;
+    width: 100%;
   }
 
   .search-container {
@@ -323,6 +320,21 @@ ol {
 
   .search-list-container {
     max-height: 77%;
+  }
+
+  [data-region="caught"] {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  [data-region="caught"] li {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 667px) and (orientation: landscape) {
+  .region-text {
+    font-size: 1rem;
   }
 }
 
@@ -338,9 +350,18 @@ ol {
   .pokemon-types {
     font-size: 1.2rem;
   }
+
+  [data-region="caught"] {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  [data-region="caught"] li {
+    width: calc(100% / 3);
+  }
 }
 
-@media screen and (min-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 1000px) and (orientation: landscape) {
   .modal-background {
     padding: 25px;
     justify-content: space-around;
@@ -355,14 +376,12 @@ ol {
   }
 
   .pokemon-name {
-    font-size: 40px;
+    font-size: 35px;
   }
 
-  .pokemon-types {
-    font-size: 1.5rem;
-  }
-
-  .region-text {
+  .pokemon-types,
+  .region-text,
+  .homepage-text {
     font-size: 1.5rem;
   }
 
@@ -384,6 +403,12 @@ ol {
 
   .search-list-container {
     max-height: 630px;
+  }
+}
+
+@media screen and (width: 375px) and (orientation: portrait) {
+  .pokemon-flavor-text {
+    height: 120px;
   }
 }
 
@@ -431,9 +456,8 @@ ol {
   }
 
   .pokemon-flavor-text {
-    width: 320px;
+    width: 400px;
     height: 140px;
-    border: 10px ridge;
     font-size: 1.5rem;
   }
 
@@ -441,5 +465,14 @@ ol {
     top: 20%;
     left: 7%;
     max-height: 75%;
+  }
+
+  [data-region="caught"] {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  [data-region="caught"] li {
+    width: 50%;
   }
 }

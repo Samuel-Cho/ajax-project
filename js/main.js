@@ -1,18 +1,19 @@
 var $pressHereButton = document.querySelector('.press-here');
 var $modal = document.querySelector('.modal-background');
 var $appName = document.querySelector('.app-name');
+var $homepageText = document.querySelector('.homepage-text-container');
 var $buttonContainer = document.querySelector('.button-container');
 var $region = document.querySelectorAll('.region');
 var $listContainer = document.querySelector('.list-container');
 var $searchContainer = document.querySelector('.search-container');
 var $searchListContainer = document.querySelector('.search-list-container');
+var $kantoOl = document.querySelector('[data-region="kanto"]');
+var $johtoOl = document.querySelector('[data-region="johto"]');
+var $caughtOl = document.querySelector('[data-region="caught"]');
 var ulSearch = null;
 var nationalList = [];
 var kantoList = [];
 var johtoList = [];
-var kantoOl = null;
-var johtoOl = null;
-var caughtOl = null;
 var pokemonObject = {
   pokemon_name: null,
   image: null,
@@ -27,10 +28,11 @@ $pressHereButton.addEventListener('click', function (event) {
   $modal.className = 'modal-background';
   $pressHereButton.textContent = '';
   $appName.className = 'hidden app-name';
+  $homepageText.className = 'hidden homepage-text-container';
 });
 
 $buttonContainer.addEventListener('click', function (event) {
-  if (event.target.matches('button') || event.target.matches('p')) {
+  if (event.target.matches('img') || event.target.matches('p')) {
     var closestRegion = event.target.closest('.region');
     for (var regionIndex = 0; regionIndex < $region.length; regionIndex++) {
       $region[regionIndex].className = 'region';
@@ -39,31 +41,22 @@ $buttonContainer.addEventListener('click', function (event) {
     var $pokemonPageHidden = document.querySelector('.pokemon-page');
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
-    if (closestRegion.id === 'kanto') {
-      kantoOl.className = 'kanto-list';
-      johtoOl.className = 'hidden johto-list';
-      if (caughtOl !== null) {
-        caughtOl.className = 'hidden caught-list';
+    var $regionList = document.querySelectorAll('.region-list');
+    if (closestRegion.id !== 'search') {
+      $caughtOl.className = 'hidden caught-list';
+      for (var b = 0; b < $regionList.length; b++) {
+        if (closestRegion.id === $regionList[b].getAttribute('data-region')) {
+          $regionList[b].className = 'region-list';
+        } else {
+          $regionList[b].className = 'hidden region-list';
+        }
       }
       if ($pokemonPageHidden !== null) {
         $pokemonPageHidden.remove();
       }
-    } else if (closestRegion.id === 'johto') {
-      kantoOl.className = 'hidden kanto-list';
-      johtoOl.className = 'johto-list';
-      if (caughtOl !== null) {
-        caughtOl.className = 'hidden caught-list';
+      if (closestRegion.id === 'caught') {
+        caughtDex(data);
       }
-      if ($pokemonPageHidden !== null) {
-        $pokemonPageHidden.remove();
-      }
-    } else if (closestRegion.id === 'caught') {
-      kantoOl.className = 'hidden kanto-list';
-      johtoOl.className = 'hidden johto-list';
-      if ($pokemonPageHidden !== null) {
-        $pokemonPageHidden.remove();
-      }
-      caughtDex(data);
     } else {
       $listContainer.className = 'hidden list-container';
       $searchContainer.className = 'search-container';
@@ -100,15 +93,12 @@ function kantoDex() {
   xhrKanto.responseType = 'json';
   loadingGif();
   xhrKanto.addEventListener('load', function () {
-    kantoOl = document.createElement('ol');
-    kantoOl.setAttribute('class', 'kanto-list');
     for (var kantoIndex = 0; kantoIndex < 151; kantoIndex++) {
       kantoList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       nationalList.push(capitalize(xhrKanto.response.pokemon_entries[kantoIndex].pokemon_species.name));
       var kantoLi = createListItem(kantoList[kantoIndex]);
-      kantoOl.appendChild(kantoLi);
+      $kantoOl.appendChild(kantoLi);
     }
-    $listContainer.appendChild(kantoOl);
     johtoDex();
   });
   xhrKanto.send();
@@ -121,18 +111,14 @@ function johtoDex() {
   xhrJohto.open('GET', 'https://pokeapi.co/api/v2/pokedex/1/');
   xhrJohto.responseType = 'json';
   xhrJohto.addEventListener('load', function () {
-    johtoOl = document.createElement('ol');
-    johtoOl.setAttribute('class', 'hidden johto-list');
-    johtoOl.setAttribute('start', '152');
     for (var johtoIndex = 151; johtoIndex < 251; johtoIndex++) {
       johtoList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
       nationalList.push(capitalize(xhrJohto.response.pokemon_entries[johtoIndex].pokemon_species.name));
     }
     for (var j = 0; j < johtoList.length; j++) {
       var johtoLi = createListItem(johtoList[j]);
-      johtoOl.appendChild(johtoLi);
+      $johtoOl.appendChild(johtoLi);
     }
-    $listContainer.appendChild(johtoOl);
     loadingGif();
   });
   xhrJohto.send();
@@ -152,13 +138,11 @@ function pokemonPage(target) {
     for (var x = 0; x < $region.length; x++) {
       $region[x].className = 'region';
     }
-    kantoOl.className = 'hidden kanto-list';
-    johtoOl.className = 'hidden johto-list';
+    $kantoOl.className = 'hidden region-list';
+    $johtoOl.className = 'hidden region-list';
     $listContainer.className = 'list-container';
     $searchContainer.className = 'hidden search-container';
-    if (caughtOl !== null) {
-      caughtOl.className = 'hidden caught-list';
-    }
+    $caughtOl.className = 'hidden region-list';
     pokemonObject.pokemon_name = selectedPokemon.id;
     divPokemonPage = createPokemonPage(pokemonObject);
     pokemonTypeImageId(selectedPokemon.id);
@@ -187,11 +171,18 @@ function pokemonTypeImageId(id) {
     divColumnLeft.setAttribute('class', 'column-left');
     divPokemonPage.appendChild(divColumnLeft);
 
+    var errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
+
     var imgPokemon = document.createElement('img');
     imgPokemon.setAttribute('class', 'pokemon-img');
     imgPokemon.setAttribute('src', pokemonObject.image);
-    imgPokemon.setAttribute('alt', 'Pokemon Image');
-    divColumnLeft.appendChild(imgPokemon);
+    imgPokemon.setAttribute('alt', capitalize(pokemonObject.pokemon_name) + ' Image');
+    imgPokemon.addEventListener('load', event => {
+      divColumnLeft.prepend(imgPokemon);
+    });
+    imgPokemon.addEventListener('error', event => {
+      imgPokemon.setAttribute('src', errorImageUrl);
+    });
 
     var divPokemonNTContainer = document.createElement('div');
     divPokemonNTContainer.setAttribute('class', 'pokemon-nt-container');
@@ -241,14 +232,15 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divColumnRight.appendChild(pPokemonFT);
 
-    var buttonCatch = document.createElement('button');
-    buttonCatch.setAttribute('class', 'catch not-caught');
+    var buttonCatch = document.createElement('img');
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
         buttonCatch.setAttribute('class', 'catch caught');
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/5/55/Cherish_Ball_VIII.png');
         break;
       } else {
         buttonCatch.setAttribute('class', 'catch not-caught');
+        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
       }
     }
     divColumnRight.appendChild(buttonCatch);
@@ -258,9 +250,12 @@ function pokemonFlavorText(id) {
     function catchPokemon(event) {
       if (buttonCatch.className === 'catch not-caught') {
         buttonCatch.className = 'catch caught';
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/5/55/Cherish_Ball_VIII.png');
+
         data.caughtList.push(pokemonObject);
       } else {
         buttonCatch.className = 'catch not-caught';
+        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
         for (var a = 0; a < data.caughtList.length; a++) {
           if (data.caughtList[a].pokemon_name === id) {
             data.caughtList.splice(a, 1);
@@ -272,8 +267,8 @@ function pokemonFlavorText(id) {
         return a.number - b.number;
       });
     }
+    loadingGif();
   });
-  loadingGif();
   xhrFlavorText.send();
 }
 
@@ -284,27 +279,29 @@ function createPokemonPage(pokemonObject) {
 }
 
 function caughtDex(data) {
-  var $caughtListHidden = document.querySelector('.caught-list');
-  if ($caughtListHidden !== null) {
-    $caughtListHidden.remove();
+  while ($caughtOl.firstChild) {
+    $caughtOl.removeChild($caughtOl.lastChild);
   }
-  caughtOl = document.createElement('ol');
-  caughtOl.setAttribute('class', 'caught-list');
-  for (var caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
-    var caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
-    var caughtPokemonLi = createListItem(caughtPokemonName);
+  for (let caughtIndex = 0; caughtIndex < data.caughtList.length; caughtIndex++) {
+    const caughtPokemonName = capitalize(data.caughtList[caughtIndex].pokemon_name);
+    const caughtPokemonLi = createListItem(caughtPokemonName);
     caughtPokemonLi.setAttribute('value', data.caughtList[caughtIndex].number);
-    var divCaughtImg = document.createElement('div');
+    const divCaughtImg = document.createElement('div');
     divCaughtImg.setAttribute('class', 'caught-img-container');
     caughtPokemonLi.appendChild(divCaughtImg);
-    var caughtPokemonImage = document.createElement('img');
+    const errorImageUrl = 'https://cdn.systweak.com/content/wp/systweakblogsnew/uploads_new/2018/03/How-to-Fix-Aw-Snap-Error-in-Chrome1.jpg';
+    const caughtPokemonImage = document.createElement('img');
     caughtPokemonImage.setAttribute('class', 'caught-pokemon-img');
     caughtPokemonImage.setAttribute('src', data.caughtList[caughtIndex].image);
-    caughtPokemonImage.setAttribute('alt', 'Pokemon Image');
-    divCaughtImg.appendChild(caughtPokemonImage);
-    caughtOl.appendChild(caughtPokemonLi);
+    caughtPokemonImage.setAttribute('alt', capitalize(data.caughtList[caughtIndex].pokemon_name) + ' Image');
+    caughtPokemonImage.addEventListener('load', event => {
+      divCaughtImg.appendChild(caughtPokemonImage);
+    });
+    caughtPokemonImage.addEventListener('error', event => {
+      caughtPokemonImage.setAttribute('src', errorImageUrl);
+    });
+    $caughtOl.appendChild(caughtPokemonLi);
   }
-  $listContainer.appendChild(caughtOl);
 }
 
 function createSearchList() {
