@@ -84,26 +84,8 @@ body {
 .caught {
   height: 47px;
   width: 47px;
-
-  /* border-radius: 50%; */
   border: none;
 }
-
-/* .search-button {
-  background: linear-gradient(180deg, #8f00ff 40.1%, rgba(0, 0, 0, 0) 60%), #fff;
-} */
-
-/* .kanto-button {
-  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #0085ff;
-} */
-
-/* .johto-button {
-  background: linear-gradient(180deg, #ffd700 40.63%, rgba(255, 255, 255, 0) 60%), #c0c0c0;
-} */
-
-/* .caught-button {
-  background: linear-gradient(180deg, #ff3030 40.63%, rgba(255, 255, 255, 0) 60%), #fff;
-} */
 
 .select {
   text-decoration: underline;
@@ -206,17 +188,7 @@ ol {
 .not-caught,
 .caught {
   margin-top: 8px;
-
-  /* border-radius: 50%; */
 }
-
-/* .not-caught {
-  background: radial-gradient(50% 50% at 50% 50%, #fff 64.9%, rgba(255, 255, 255, 0) 100%), #ff3030;
-} */
-
-/* .caught {
-  background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%), #ff3030;
-} */
 
 .region-button:focus,
 .not-caught:focus,

@@ -232,10 +232,7 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divColumnRight.appendChild(pPokemonFT);
 
-    // var buttonCatch = document.createElement('button');
     var buttonCatch = document.createElement('img');
-    // buttonCatch.setAttribute('src', 'https://listimg.pinclipart.com/picdir/s/558-5584065_transparent-pokeball-clipart-pokeball-black-and-white-png.png');
-    // buttonCatch.setAttribute('class', 'catch not-caught');
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
         buttonCatch.setAttribute('class', 'catch caught');
