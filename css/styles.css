@@ -226,6 +226,14 @@ ol {
   transform: translate(-50%, -50%);
 }
 
+.gotta-catch-em-all {
+  margin-top: 40px;
+  padding-top: 40px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
 @media screen and (orientation: landscape) {
   .loading {
     height: 100%;
