@@ -412,6 +412,10 @@ ol {
   .search-list-container {
     max-height: 630px;
   }
+
+  .gotta-catch-em-all {
+    font-size: 2.5rem;
+  }
 }
 
 @media screen and (width: 375px) and (orientation: portrait) {
@@ -482,5 +486,9 @@ ol {
 
   [data-region="caught"] li {
     width: 50%;
+  }
+
+  .gotta-catch-em-all {
+    font-size: 2rem;
   }
 }
