@@ -103,12 +103,12 @@ function kantoDex() {
   });
   xhrKanto.addEventListener('error', error => {
     console.error(error);
-    const errorMessage = document.createElement('p');
-    errorMessage.setAttribute('class', 'error-message');
-    const errorText = document.createTextNode('Connection Error with API');
-    errorMessage.appendChild(errorText);
-    $kantoOl.appendChild(errorMessage);
-    $johtoOl.appendChild(errorMessage.cloneNode(true));
+    const errorMessageList = document.createElement('p');
+    errorMessageList.setAttribute('class', 'error-message-list');
+    const errorTextList = document.createTextNode('Connection Error with API');
+    errorMessageList.appendChild(errorTextList);
+    $kantoOl.appendChild(errorMessageList);
+    $johtoOl.appendChild(errorMessageList.cloneNode(true));
     loadingGif();
   });
   xhrKanto.send();
@@ -217,6 +217,15 @@ function pokemonTypeImageId(id) {
 
     pokemonFlavorText(id);
   });
+  xhrTypeImageId.addEventListener('error', error => {
+    console.error(error);
+    const errorMessagePage = document.createElement('p');
+    errorMessagePage.setAttribute('class', 'error-message-page');
+    const errorTextPage = document.createTextNode('Connection Error with API');
+    errorMessagePage.appendChild(errorTextPage);
+    divPokemonPage.appendChild(errorMessagePage);
+    loadingGif();
+  });
   xhrTypeImageId.send();
 }
 
@@ -246,11 +255,11 @@ function pokemonFlavorText(id) {
     for (var z = 0; z < data.caughtList.length; z++) {
       if (data.caughtList[z].pokemon_name === id) {
         buttonCatch.setAttribute('class', 'catch caught');
-        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/5/55/Cherish_Ball_VIII.png');
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
         break;
       } else {
         buttonCatch.setAttribute('class', 'catch not-caught');
-        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
       }
     }
     divColumnRight.appendChild(buttonCatch);
@@ -260,12 +269,12 @@ function pokemonFlavorText(id) {
     function catchPokemon(event) {
       if (buttonCatch.className === 'catch not-caught') {
         buttonCatch.className = 'catch caught';
-        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/5/55/Cherish_Ball_VIII.png');
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
 
         data.caughtList.push(pokemonObject);
       } else {
         buttonCatch.className = 'catch not-caught';
-        buttonCatch.setAttribute('src', 'https://cdn.bulbagarden.net/upload/thumb/9/98/Pok%C3%A9_Ball_VIII.png/1200px-Pok%C3%A9_Ball_VIII.png');
+        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
         for (var a = 0; a < data.caughtList.length; a++) {
           if (data.caughtList[a].pokemon_name === id) {
             data.caughtList.splice(a, 1);

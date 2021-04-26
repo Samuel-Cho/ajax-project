@@ -227,9 +227,14 @@ ol {
 }
 
 .gotta-catch-em-all,
-.error-message {
+.error-message-list {
   margin-top: 40px;
   padding-top: 40px;
+}
+
+.gotta-catch-em-all,
+.error-message-list,
+.error-message-page {
   width: 100%;
   text-align: center;
   font-size: 1.3rem;
@@ -415,7 +420,8 @@ ol {
   }
 
   .gotta-catch-em-all,
-  .error-message {
+  .error-message-list,
+  .error-message-page {
     font-size: 2.5rem;
   }
 }
@@ -491,7 +497,8 @@ ol {
   }
 
   .gotta-catch-em-all,
-  .error-message {
+  .error-message-list,
+  .error-message-page {
     font-size: 2rem;
   }
 }
