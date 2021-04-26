@@ -101,6 +101,16 @@ function kantoDex() {
     }
     johtoDex();
   });
+  xhrKanto.addEventListener('error', error => {
+    console.error(error);
+    const errorMessage = document.createElement('p');
+    errorMessage.setAttribute('class', 'error-message');
+    const errorText = document.createTextNode('Connection Error with API');
+    errorMessage.appendChild(errorText);
+    $kantoOl.appendChild(errorMessage);
+    $johtoOl.appendChild(errorMessage.cloneNode(true));
+    loadingGif();
+  });
   xhrKanto.send();
 }
 

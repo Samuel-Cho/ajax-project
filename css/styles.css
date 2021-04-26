@@ -226,7 +226,8 @@ ol {
   transform: translate(-50%, -50%);
 }
 
-.gotta-catch-em-all {
+.gotta-catch-em-all,
+.error-message {
   margin-top: 40px;
   padding-top: 40px;
   width: 100%;
@@ -413,7 +414,8 @@ ol {
     max-height: 630px;
   }
 
-  .gotta-catch-em-all {
+  .gotta-catch-em-all,
+  .error-message {
     font-size: 2.5rem;
   }
 }
@@ -488,7 +490,8 @@ ol {
     width: 50%;
   }
 
-  .gotta-catch-em-all {
+  .gotta-catch-em-all,
+  .error-message {
     font-size: 2rem;
   }
 }
