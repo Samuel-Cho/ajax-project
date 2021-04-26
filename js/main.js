@@ -252,14 +252,19 @@ function pokemonFlavorText(id) {
     divColumnRight.appendChild(pPokemonFT);
 
     var buttonCatch = document.createElement('img');
-    for (var z = 0; z < data.caughtList.length; z++) {
-      if (data.caughtList[z].pokemon_name === id) {
-        buttonCatch.setAttribute('class', 'catch caught');
-        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
-        break;
-      } else {
-        buttonCatch.setAttribute('class', 'catch not-caught');
-        buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
+    if (data.caughtList.length === 0) {
+      buttonCatch.setAttribute('class', 'catch not-caught');
+      buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
+    } else {
+      for (var z = 0; z < data.caughtList.length; z++) {
+        if (data.caughtList[z].pokemon_name === id) {
+          buttonCatch.setAttribute('class', 'catch caught');
+          buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
+          break;
+        } else {
+          buttonCatch.setAttribute('class', 'catch not-caught');
+          buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
+        }
       }
     }
     divColumnRight.appendChild(buttonCatch);
