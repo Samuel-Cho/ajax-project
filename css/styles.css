@@ -240,6 +240,18 @@ ol {
   font-size: 1.3rem;
 }
 
+.button-catch-text {
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+
+.catch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (orientation: landscape) {
   .loading {
     height: 100%;
@@ -353,7 +365,8 @@ ol {
 }
 
 @media screen and (min-width: 812px) and (orientation: landscape) {
-  .pokemon-flavor-text {
+  .pokemon-flavor-text,
+  .button-catch-text {
     font-size: 1.2rem;
   }
 
@@ -478,6 +491,10 @@ ol {
   .pokemon-flavor-text {
     width: 400px;
     height: 140px;
+    font-size: 1.5rem;
+  }
+
+  .button-catch-text {
     font-size: 1.5rem;
   }
 

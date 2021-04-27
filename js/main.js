@@ -251,33 +251,48 @@ function pokemonFlavorText(id) {
     pPokemonFT.appendChild(tnPokemonFT);
     divColumnRight.appendChild(pPokemonFT);
 
+    var divCatch = document.createElement('div');
+    divCatch.setAttribute('class', 'catch-container');
+
+    var pCatch = document.createElement('p');
+    pCatch.setAttribute('class', 'button-catch-text');
+    var catchText = document.createTextNode('');
+    pCatch.appendChild(catchText);
+
     var buttonCatch = document.createElement('img');
     if (data.caughtList.length === 0) {
       buttonCatch.setAttribute('class', 'catch not-caught');
       buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
+      pCatch.textContent = 'Catch';
     } else {
       for (var z = 0; z < data.caughtList.length; z++) {
         if (data.caughtList[z].pokemon_name === id) {
           buttonCatch.setAttribute('class', 'catch caught');
           buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
+          pCatch.textContent = 'Release';
           break;
         } else {
           buttonCatch.setAttribute('class', 'catch not-caught');
           buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
+          pCatch.textContent = 'Catch';
         }
       }
     }
-    divColumnRight.appendChild(buttonCatch);
+    divCatch.appendChild(buttonCatch);
+    divCatch.appendChild(pCatch);
+    divColumnRight.appendChild(divCatch);
 
     buttonCatch.addEventListener('click', catchPokemon);
 
     function catchPokemon(event) {
       if (buttonCatch.className === 'catch not-caught') {
+        pCatch.textContent = 'Release';
         buttonCatch.className = 'catch caught';
         buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/a/a2/Cherish_Ball_PE.png/1146px-Cherish_Ball_PE.png');
 
         data.caughtList.push(pokemonObject);
       } else {
+        pCatch.textContent = 'Catch';
         buttonCatch.className = 'catch not-caught';
         buttonCatch.setAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/f/f5/Pok%C3%A9_Ball_PE.png/1204px-Pok%C3%A9_Ball_PE.png');
         for (var a = 0; a < data.caughtList.length; a++) {
